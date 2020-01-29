@@ -1,0 +1,67 @@
+*{
+    padding:0;
+    margin:0
+}
+
+.root{
+    position: absolute;
+    margin: 0;
+}
+
+.header{
+    
+    background-color: burlywood;
+    display: flex;
+    margin-top: -30px;
+    height: 30px;
+    width: 1300px;
+    position: fixed;
+    overflow: hidden;
+    align-items: center;
+}
+
+.body{
+    
+    margin-top: 30px;
+    background-color: crimson;
+    min-height: 643px;
+    text-align: center;
+}
+
+.footer{
+    background-color: cyan;
+    text-align: center;
+    min-height: 25px;
+    
+}
+
+.search input{
+    background-color:cornflowerblue;
+    transform: translateX(10px);}
+
+
+.categories select{
+    background-color: darkred;
+    transform: translateX(20px)}
+
+
+
+
+
+.basket button{
+    background-color: yellow;
+    transform: translateX(-70px);
+    width: 170px;
+}
+
+.login button{
+    background-color: yellow;
+    width: 150px;
+    transform: translateX(750px);
+}
+
+.add{
+    background-color: violet;
+    transform: translateX(-130px);
+    width: 500px;
+}
