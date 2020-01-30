@@ -6,21 +6,23 @@ import {Link} from "react-router-dom"
 
 const Header = (match) => {
     console.log("w header")
+    const {logged, shoppingList, userName}=match.userState
+    
     return ( 
         <div className="header">
             <Search/>
             <Categories/>
-            {match.userState.logged?
+            {logged?
             <>
             <div className="login"> 
                 <Link to="/">
-                    <button onClick={()=>match.dispatch({type: "loggedOut"})}>Logout</button>
+                    <button onClick={()=>match.setUserState({logged: false})}>{userName} Logout</button>
                 </Link></div>
                 <div className="add">jakaś reklama, jakiś tekst</div>
                 
                 <div className="basket">
                 <Link to="/basket">
-                    <button>Go to cashier! items: {match.userState.shoppingList.length}</button>
+                    <button>Go to cashier! items: {shoppingList.length}</button>
                 </Link>
             </div>
                 </> 
@@ -28,7 +30,7 @@ const Header = (match) => {
             <>
             <div className="login"> 
                 <Link to="/login">
-                    <button onClick={()=>match.dispatch({type:"logged"})}>Login</button>
+                    <button onClick={()=>match.history.push({pathname:"/login"})}>Login</button>
                 </Link></div>
                 <div className="add">jakaś reklama, jakiś tekst</div>
             </>} 

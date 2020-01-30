@@ -9,56 +9,28 @@ import Basket from "./Components/HeaderComponents/Basket"
 import User from "./Components/HeaderComponents/User"
 import "./App.css"
 
-const initialState = {
-  logged: false,
-  isLogin: false,
-  userName: "",
-  shoppingList:[],
-  message: ""}
 
-function reducer(state, action){
-  switch(action.type){
-    case "isLogin":{
-      return{
-        ...state,
-        isLogin: true,
-        message: "loguje sie"}}
-    case "logged":{
-      return{
-        logged: true,
-        isLogin: false,
-        userName: "kutasiński",
-        shoppingList: ["wibrator", "podpaska"],
-        message: "Zalogowany"}}
-    case "loggedOut":{
-      return{
-        logged: false,
-        isLogin: false,
-        userName: "",
-        shoppingList:[],
-        message: "wylogowany"}}
-
-    case "wrongUser":{
-      return{
-        logged: false,
-        isLogin: false,
-        message: "Zła nazwa uzytkownika",
-        shoppingList: []}}}}
-  
 
 
 
 function App() {
   
-  const [userState, dispatch]=useReducer(reducer, initialState)
+  const [userState, setUserState]=useState({
+    logged: false,
+    isLogin: false,
+    email:"",
+    userName: "",
+    shoppingList:[],
+    message: ""})
+
   console.log("w głównym")
   return (
     <>
 
       <Router >
-        <Route path="/" render={props=>(<Header {...props} userState={userState} dispatch={dispatch}/>)}/>
+        <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/" exact component={OffersBody}/>
-        <Route path="/login" render={props=>(<LoginBody userState={userState} dispatch={dispatch}/>)}/>
+        <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/create" component={CreateAccountBody}/>
         <Route path="/basket" component={Basket}/>
         <Route path="/user" component={User}/>

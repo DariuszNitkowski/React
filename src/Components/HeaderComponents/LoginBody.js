@@ -28,17 +28,26 @@ const LoginBody = (match) => {
             .then(res=>{
                 if (res.data.length===0) setLogMessage([`email: ${email} is not registred`])
                 else {
-                    if (res.data[0].password!==password) {
+                    let mongoData=res.data[0]
+                    if (mongoData.password!==password) {
                         setLogMessage(["Wrong password"])
                         formData["pass"].value=""}
                     else{
-                        match.dispatch({type:"logged"})
-                        match.history.push({pathname:"/"})
+                        match.setUserState({
+                            logged: true,
+                            isLogin: false,
+                            email: email,
+                            userName: mongoData.name,
+                            shoppingList: "",
+                            message: ""
+                        })
+
+                        match.history.push({pathname:"/"})}
                     }
-                }
-            })
-        }
-    }
+                })}}
+            
+        
+    
 
     
     
