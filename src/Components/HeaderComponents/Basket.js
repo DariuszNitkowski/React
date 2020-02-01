@@ -25,10 +25,11 @@ const Basket = (props) => {
             <div id="basketTitle">Items in your basket</div>
             <table id="basketTable">
                 <thead><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Delete</th></tr></thead>
-            <tbody>{shoppingList.map(item=><tr key={item.id}><td className="basketName">{item.name}</td><td className="basketVol">{item.vol}</td><td className="basketPrice">{item.price}</td><td className="basketBtn">
+            <tbody>{shoppingList.map(item=><tr key={item.id}><td className="basketName">{item.name}</td><td className="basketVol">{item.vol}</td><td className="basketPrice">{item.price} PLN</td><td className="basketBtn">
                 <button onClick={()=>handleDelte(item.id)}>Delete</button></td></tr>)}</tbody>
-    </table></>: <div id="emptyBasket">No items in your basket</div>}
-    <div><button id="payBtn" onClick={handlePay}>Pay for items</button></div>
+    </table><div><button id="payBtn" onClick={handlePay}>Pay for items</button></div></>: 
+    <div id="emptyBasket">No items in your basket</div>}
+    
     </div>
      );
 }

@@ -27,7 +27,7 @@ const AddProduct = (match) => {
             let keywords=[]
             keywords.push(name, productDescr, category)
             let newProduct={
-                name: name, vol: vol, description: productDescr, keywords: keywords, price: price, owner: email}
+                name: name, vol: vol, description: productDescr, category: category, keywords: keywords, price: price, owner: email}
             axios
             .post("http://localhost:5000/product/add", newProduct)
             .then(()=>{

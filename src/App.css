@@ -17,7 +17,7 @@
     height: 30px;
     width: 1300px;
     position: fixed;
-    overflow: hidden;
+    /* overflow: hidden; */
     align-items: center;
 }
 
@@ -47,21 +47,27 @@
 
 
 
-.basket button{
+#basket button{
     background-color: yellow;
-    transform: translateX(-70px);
+    transform: translateX(-50px);
     width: 170px;
 }
-
-.login button{
+#dropdown button{
     background-color: yellow;
-    width: 150px;
+    width: 120px;
     transform: translateX(750px);
 }
 
-.add{
+
+#login button{
+    background-color: yellow;
+    width: 120px;
+    transform: translateX(750px);}
+
+
+#add{
     background-color: violet;
-    transform: translateX(-130px);
+    transform: translateX(-100px);
     width: 500px;
 }
 /* Offers Body */
@@ -124,7 +130,11 @@ button:hover{
 #basketTable{
     margin-left: 40px;
     transform: translateY(100px);
+
 }
+#basketTable td{
+    border: solid black 2px;
+    }
 
 #basketTitle{
     transform: translateY(40px);
@@ -144,11 +154,15 @@ button:hover{
 } 
 
 .basketPrice{
-    width: 100px;
+    width: 150px;
 } 
 
 .basketBtn{
     width: 200px;
+}
+
+.basketBtn button{
+    padding:10px;
 }
 
 #payBtn{
@@ -156,3 +170,38 @@ button:hover{
     transform: translateY(200px) translateX(300px);
 
 }
+#dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+#dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 1;
+    text-decoration-line: none;
+}
+
+#dropdown:hover #dropdown-content {
+    transform: translateX(750px);
+    display: block;
+    overflow: visible; 
+    text-decoration: none;
+    line-height: 2em;
+}
+
+#divider{
+    line-height: 7px;
+    transform: translateY(-5px);
+}
+
+#dropdown-content div{
+    text-decoration: none;
+}
+
+
+

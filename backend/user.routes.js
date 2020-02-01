@@ -20,9 +20,7 @@ UserRouter.route("/").get((req,res)=>{
 })
 
 UserRouter.route("/add").post((req,res)=>{
-    let name = req.body.name
-    let password=req.body.password
-    let email = req.body.email
+    let {name, password, email} = req.body
     const newUser=new User({email, name, password})
     newUser.save()
     .then(()=>res.json("user added"))

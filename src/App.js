@@ -6,9 +6,9 @@ import OffersBody from "./Components/HeaderComponents/OffersBody"
 import LoginBody from "./Components/HeaderComponents/LoginBody"
 import CreateAccountBody from './Components/HeaderComponents/CreateAccountBody'
 import Basket from "./Components/HeaderComponents/Basket"
-import User from "./Components/HeaderComponents/User"
 import AddProduct from "./Components/HeaderComponents/AddProduct"
 import Payment from "./Components/HeaderComponents/Payment"
+import User from "./Components/HeaderComponents/User"
 import "./App.css"
 
 
@@ -38,7 +38,6 @@ function App() {
         <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
         <Route path="/user" component={User}/>
-        
         <Route path="/" component={Footer}/>
         
       </Router>

@@ -11,11 +11,10 @@ ProductRouter.route("/:search").get((req,res)=>{
 
 ProductRouter.route("/add").post((req,res)=>{
     
-    let {name, vol, description, keywords, price, owner}=req.body
-    let newProduct=new Product({name, vol, description, keywords, price, owner})
-    console.log(newProduct)
+    let {name, vol, description, category, keywords, price, owner}=req.body
+    const newProduct=new Product({name, vol, description, category, keywords, price, owner})
     newProduct.save()
-    .then(()=>console.log(res))
+    .then(()=>res.send())
     .catch((err)=>res.json(err))
 })
 
