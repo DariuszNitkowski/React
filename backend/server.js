@@ -22,6 +22,9 @@ connection.once("open",()=>{
 const userRoute=require("./user.routes")
 app.use("/", userRoute)
 
+const productRoute=require("./products.routes")
+app.use("/product", productRoute)
+
 app.listen(port, (err)=>{
     if (err) throw err})
 

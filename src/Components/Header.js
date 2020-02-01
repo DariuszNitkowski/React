@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Search from "./HeaderComponents/Search"
 import Categories from "./HeaderComponents/Categories"
 
+
 import {Link} from "react-router-dom"
 
 const Header = (match) => {

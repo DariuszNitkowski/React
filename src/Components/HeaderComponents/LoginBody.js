@@ -38,7 +38,7 @@ const LoginBody = (match) => {
                             isLogin: false,
                             email: email,
                             userName: mongoData.name,
-                            shoppingList: "",
+                            shoppingList: mongoData.shoppingList,
                             message: ""
                         })
 

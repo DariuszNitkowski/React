@@ -32,7 +32,7 @@ const CreateAccountBody = (props) => {
             axios
             .get(`http://localhost:5000/${email}`)
             .then(res=>{
-                if (res.data[0].email===email) {
+                if (res.data.length!==0) {
                     setMessage([`user ${email} already exists`])
                     formData["email"].value=""}
                 else{
@@ -44,8 +44,8 @@ const CreateAccountBody = (props) => {
                     axios 
                     .post("http://localhost:5000/add", user)
                     .then(()=>{
-                        
-                        props.history.push({pathname: "/"})})
+                        setMessage(["User created, please login"])
+                        setTimeout(()=>props.history.push({pathname: "/"}), 5000)})
                     .catch(err=>setMessage(["cant create user, try again"]))}})}
     }
         

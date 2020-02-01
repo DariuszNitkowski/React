@@ -1,3 +1,4 @@
+/* main */
 *{
     padding:0;
     margin:0
@@ -34,7 +35,7 @@
     min-height: 25px;
     
 }
-
+/* header */
 .search input{
     background-color:cornflowerblue;
     transform: translateX(10px);}
@@ -43,8 +44,6 @@
 .categories select{
     background-color: darkred;
     transform: translateX(20px)}
-
-
 
 
 
@@ -64,4 +63,96 @@
     background-color: violet;
     transform: translateX(-130px);
     width: 500px;
+}
+/* Offers Body */
+
+.productImageMedium{
+    width:100px;height:100px;
+}
+#products td{
+    border: solid black 2px;
+    }
+button:hover{
+    cursor: pointer;
+}
+
+#products{
+    margin-left: 20px;
+}
+
+.tableName {
+    width: 200px;
+    height: 150px;
+}
+
+.tableDescr{
+    width: 300px;
+}
+.tablePrice{
+    width: 100px;
+    height: 150px;
+}
+
+.tableBuy{
+    width: 200px;
+    height: 150px;
+}
+
+.tableImg{
+    width:152px;
+    height:152px;
+}
+
+.tableImg :hover{
+    cursor: pointer;
+    width:200px;
+    height:200px;
+    transform: translateZ(100px);
+    overflow: hidden;
+}
+
+.buyBtn{
+    background-color: blue;
+    padding: 10px;
+}
+
+.tableVol{
+    width: 100px;
+}
+/* Basket */
+
+#basketTable{
+    margin-left: 40px;
+    transform: translateY(100px);
+}
+
+#basketTitle{
+    transform: translateY(40px);
+}
+
+.basketName{
+    width: 300px;
+}
+
+#emptyBasket{
+    transform: translateY(40px);
+    
+}
+
+.basketVol{
+    width: 100px;
+} 
+
+.basketPrice{
+    width: 100px;
+} 
+
+.basketBtn{
+    width: 200px;
+}
+
+#payBtn{
+    padding: 20px;
+    transform: translateY(200px) translateX(300px);
+
 }
