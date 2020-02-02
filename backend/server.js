@@ -20,7 +20,7 @@ connection.once("open",()=>{
 })
 
 const userRoute=require("./user.routes")
-app.use("/", userRoute)
+app.use("/user", userRoute)
 
 const productRoute=require("./products.routes")
 app.use("/product", productRoute)

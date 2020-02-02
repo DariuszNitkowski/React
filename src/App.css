@@ -19,6 +19,7 @@
     position: fixed;
     /* overflow: hidden; */
     align-items: center;
+    z-index: 1;
 }
 
 #body{
@@ -27,6 +28,8 @@
     background-color: crimson;
     min-height: 643px;
     text-align: center;
+    z-index: -1;
+    
 }
 
 .footer{
@@ -214,4 +217,8 @@ button:hover{
 
 #pageMsg{
     transform: translateY(40px);
+}
+
+#myOffers{
+    transform: translateY(50px)
 }

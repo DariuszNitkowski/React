@@ -24,7 +24,7 @@ const LoginBody = (match) => {
         if (logErrMessage.length>0) setLogMessage(logErrMessage)
         else{
             axios
-            .get(`http://localhost:5000/${email}`)
+            .get(`http://localhost:5000/user/${email}`)
             .then(res=>{
                 if (res.data.length===0) setLogMessage([`email: ${email} is not registred`])
                 else {

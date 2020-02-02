@@ -29,7 +29,7 @@ const CreateAccountBody = (match) => {
         if (errMessage.length>0) setMessage(errMessage)
         else{
             axios
-            .get(`http://localhost:5000/${email}`)
+            .get(`http://localhost:5000/user/${email}`)
             .then(res=>{
                 if (res.data.length!==0) {
                     setMessage([`user ${email} already exists`])
@@ -41,7 +41,7 @@ const CreateAccountBody = (match) => {
                         password: password
                     }
                     axios 
-                    .post("http://localhost:5000/add", user)
+                    .post("http://localhost:5000/user/add", user)
                     .then(()=>{
                         setMessage(["User created, please login"])
                         setTimeout(()=>match.history.push({pathname: "/"}), 5000)})

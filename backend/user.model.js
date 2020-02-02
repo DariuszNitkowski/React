@@ -8,7 +8,7 @@ const UserSchema=new Schema({
     password: {type: String, minlength:6, required: true},
     shoppingList: {type: Array},
     own: {type: Array}
-})
+}, {collection: "users"})
 
 
 const User=mongoose.model("users", UserSchema, "users");

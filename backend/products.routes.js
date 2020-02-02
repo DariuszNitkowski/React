@@ -14,13 +14,13 @@ ProductRouter.route("/add").post((req,res)=>{
     let {name, vol, description, category, keywords, price, owner}=req.body
     const newProduct=new Product({name, vol, description, category, keywords, price, owner})
     newProduct.save()
-    .then(()=>res.send())
+    .then((product)=>res.send(product))
     .catch((err)=>res.json(err))
 })
 
 ProductRouter.route("/").get((req,res)=>{
     Product.find()
-    .then(products=>res.send(products))
+    .then(product=>res.send(product))
     .catch(err=>res.json(err))
 })
 
@@ -47,6 +47,19 @@ ProductRouter.route("/update/:id").post((req, res)=>{
         .catch(err=>res.send(err))
     })
     .catch(err=>send.json(err))
+})
+
+ProductRouter.route("/list/:adres").get((req, res)=>{
+    Product.find({ owner: { $in: req.params.adres}})
+    
+    // query.where({_id: req.body.own})
+    // Product.find({_id: "5e36c261fe0f840a44f7a9b8"})
+        // { $in: ["5e36c261fe0f840a44f7a9b8", "5e36c76986669f0cWW98964b8f"]} })
+    .then(product=>res.send(product))
+    .catch(err=>res.json(err))
+
+    
+
 })
 
 

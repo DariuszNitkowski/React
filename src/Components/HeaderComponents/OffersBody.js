@@ -10,7 +10,7 @@ const OffersBody = (match) => {
     //     {id:"b",name:"wibrator", vol: 23, description:"cos dla pań", keywords:["sex", "dla dorosłych"],image:"./wibrator.jpg", price: 128880}])
     const [products, setProducts]=useState("")
     useEffect(()=>{
-        axios.get("http://localhost:5000")
+        axios.get("http://localhost:5000/user")
         .then(res=>console.log())})
             // setProducts(res.data.map(prod=><li key={prod._id}>{prod.name}</li>)))
     

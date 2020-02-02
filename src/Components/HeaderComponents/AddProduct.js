@@ -7,7 +7,7 @@ import {withRouter} from "react-router"
 const AddProduct = (match) => {
 
     const [message, setMessage]=useState("")
-    const {logged, email}=match.userState
+    const {logged, email, own}=match.userState
     const addProduct=(e)=>{
         e.preventDefault()
         let err=""
@@ -30,9 +30,17 @@ const AddProduct = (match) => {
                 name: name, vol: vol, description: productDescr, category: category, keywords: keywords, price: price, owner: email}
             axios
             .post("http://localhost:5000/product/add", newProduct)
-            .then(()=>{
+            .then((res)=>{
                 setMessage("Product added")
-                setTimeout(()=>match.history.push({pathname:"/"}),10000)})
+                let id=res.data._id
+                let newOwn=own
+                newOwn.push(id)
+                match.setUserState((prevState=>({
+                    ...prevState,
+                    own: newOwn})))
+                // tutaj muszę koniecznie zrobić updejt bazy danych o tej liste właśnie poszerzoną bo narazie
+                //jest tylko w state i powinna byc gitara
+                setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
             .catch(()=>setMessage("Cant add product, try again"))
         }
     

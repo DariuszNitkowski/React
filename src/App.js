@@ -28,6 +28,7 @@ function App() {
     own: []})
     // {id:"a", name: "wiertarka", vol: 1, price: 120}, {id:"aa", name: "podpaska", vol: 2, price: 12}
   console.log("w głównym")
+  console.log(userState)
   return (
     <>
 
@@ -36,7 +37,7 @@ function App() {
         <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/create" render={props=>(<CreateAccountBody userState={userState}/>)}/>
-        <Route path="/addproduct" render={props=>(<AddProduct {...props} userState={userState}/>)}/>
+        <Route path="/addproduct" render={props=>(<AddProduct {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/sell" render={props=>(<Sell {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
