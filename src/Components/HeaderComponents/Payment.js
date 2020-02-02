@@ -4,11 +4,12 @@ import {withRouter} from "react-router"
 
 const Payment = (match) => {
     
-    console.log(match)
+    const logged=match.userState.logged
     
     return ( 
-        <div className="body">
-            tutaj będę dokonywał transakcji
+        <div id="body">
+            {logged?<div>tutaj będę dokonywał transakcji</div>:
+            <div id="pageMsg">You need to log in</div>}
 
         </div>
      );

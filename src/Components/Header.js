@@ -18,7 +18,7 @@ const Header = (match) => {
                 <button>Menu</button>
                 <div id="dropdown-content">
                 <div><Link to="/user">Settings</Link></div>
-                <div><Link to="/addproduct">Add product</Link></div>
+                <div><Link to="/sell">My sell</Link></div>
                 <div id="divider">_____________</div>
                 <div><Link to="/"
                      onClick={()=>match.setUserState({logged: false})}>{userName} Logout</Link></div>

@@ -21,7 +21,9 @@ UserRouter.route("/").get((req,res)=>{
 
 UserRouter.route("/add").post((req,res)=>{
     let {name, password, email} = req.body
-    const newUser=new User({email, name, password})
+    let shoppingList=[]
+    let own=[]
+    const newUser=new User({email, name, password ,shoppingList, own})
     newUser.save()
     .then(()=>res.json("user added"))
     .catch((err)=>res.json("cant add this user"))

@@ -5,9 +5,10 @@ const Schema=mongoose.Schema
 const UserSchema=new Schema({
     email: {type: String, required: true, unique:true},
     name: {type: String, required: true, maxlength: 16},
+    password: {type: String, minlength:6, required: true},
     shoppingList: {type: Array},
-    password: {type: String, minlength:6, required: true}
-}, {collection: "users"})
+    own: {type: Array}
+})
 
 
 const User=mongoose.model("users", UserSchema, "users");

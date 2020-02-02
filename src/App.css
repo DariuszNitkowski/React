@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.body{
+#body{
     
     margin-top: 30px;
     background-color: crimson;
@@ -136,9 +136,7 @@ button:hover{
     border: solid black 2px;
     }
 
-#basketTitle{
-    transform: translateY(40px);
-}
+
 
 .basketName{
     width: 300px;
@@ -199,9 +197,21 @@ button:hover{
     transform: translateY(-5px);
 }
 
-#dropdown-content div{
-    text-decoration: none;
+#dropdown-content :visited{
+    display: none;
 }
 
+/* Create Account */
 
+#newUserForm{
+    transform: translateY(150px);
+}
 
+#userMSG{
+    color: yellow;
+
+}
+
+#pageMsg{
+    transform: translateY(40px);
+}

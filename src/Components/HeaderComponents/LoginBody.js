@@ -8,7 +8,7 @@ const validator=require("email-validator")
 const LoginBody = (match) => {
     
     const [logMessage, setLogMessage]=useState([])
-
+    const logged=match.userState.logged
     const handleLogin=(e)=>{
         e.preventDefault()
         let formData=document.forms["logForm"]
@@ -39,7 +39,7 @@ const LoginBody = (match) => {
                             email: email,
                             userName: mongoData.name,
                             shoppingList: mongoData.shoppingList,
-                            message: ""
+                            own: mongoData.own
                         })
 
                         match.history.push({pathname:"/"})}
@@ -53,16 +53,18 @@ const LoginBody = (match) => {
     
     console.log("w login body")
     return ( 
-        <div className="body">
+        <div id="body">
+            {logged?<div id="pageMsg">You are logged already</div>:
+            <>
             <form name="logForm" onSubmit={handleLogin}>
                 <div>email<input type="text" name="email"/></div>
             <div>password<input type="text" name="pass"/></div>
             <div><button type="submit">Login</button></div>
             </form>
-            <div>{logMessage}</div>
+            <div id="userMSG">{logMessage}</div>
         
             <div><Link to="/create">Utwórz konto</Link></div>
-            
+            </>}
             
        
         </div>

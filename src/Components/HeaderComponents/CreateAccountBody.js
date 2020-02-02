@@ -3,9 +3,8 @@ import {withRouter} from "react-router"
 import axios from "axios"
 const validator=require("email-validator")
 
-const CreateAccountBody = (props) => {
+const CreateAccountBody = (match) => {
     const [message, setMessage]=useState([])
-
     const addUser=(e)=>{
         e.preventDefault()
         let formData=document.forms["newUserForm"]
@@ -45,7 +44,7 @@ const CreateAccountBody = (props) => {
                     .post("http://localhost:5000/add", user)
                     .then(()=>{
                         setMessage(["User created, please login"])
-                        setTimeout(()=>props.history.push({pathname: "/"}), 5000)})
+                        setTimeout(()=>match.history.push({pathname: "/"}), 5000)})
                     .catch(err=>setMessage(["cant create user, try again"]))}})}
     }
         
@@ -54,8 +53,10 @@ const CreateAccountBody = (props) => {
 
     
     return ( 
-        <div className="body">
-            to create account please fill the form:
+        <div id="body">
+            {match.userState.logged?<div id="pageMsg"> to create account please log out</div> :
+            <>
+            <div id="pageMsg">to create account please fill the form:</div>
             <form onSubmit={addUser} id="newUserForm">
                 <input type="text" name="userName" placeholder="nickname max 16 characters" maxLength={16}/>
                 <input type="text" name="email" placeholder="what is your email adress"/>
@@ -64,9 +65,9 @@ const CreateAccountBody = (props) => {
                     <input type="password" name="password" placeholder="what will be your password"/></div>
                 <div><input type="password" name="passwordConfirmation" placeholder="please confirm password"/></div>
                 <button type="submit">Create new user</button>
-                <div><ul>{message.map(err=><li key={err}>{err}</li>)}</ul></div>
+                <div id="userMSG"><ul>{message.map(err=><li key={err}>{err}</li>)}</ul></div>
 
-            </form>
+            </form></>}
             </div>
      );
 }

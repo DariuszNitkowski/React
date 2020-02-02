@@ -2,7 +2,7 @@ const ProductRouter=require("express").Router()
 let Product=require("./products.model")
 
 ProductRouter.route("/:search").get((req,res)=>{
-    Product.find({keyword: req.params.search})
+    Product.find({keywords: req.params.search})
     .then(product=>res.json(product))
     .catch(err=>res.json(err))
 })
@@ -23,6 +23,33 @@ ProductRouter.route("/").get((req,res)=>{
     .then(products=>res.send(products))
     .catch(err=>res.json(err))
 })
+
+ProductRouter.route("/delete/:id").delete((req, res)=>{
+    Product.findByIdAndDelete(req.params.id)
+    .then(res=>res.send())
+    .catch(err=>res.send(err))
+})
+
+ProductRouter.route("/update/:id").post((req, res)=>{
+    Product.findById(req.params.id)
+    .then(product=>{
+        let {name, vol, description, category, keywords, price}=req.body
+        product.name=name
+        product.vol=vol
+        product.description=description
+        product.category=category
+        let newKeywords=[]
+        newKeywords.push(name, description, category)
+        product.keywords=newKeywords
+        product.price=price
+        product.save()
+        .then(res=>send.json(res))
+        .catch(err=>res.send(err))
+    })
+    .catch(err=>send.json(err))
+})
+
+
 
 
 module.exports=ProductRouter

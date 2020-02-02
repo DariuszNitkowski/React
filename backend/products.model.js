@@ -11,7 +11,7 @@ const ProductSchema=new Schema({
     // image:{type: },
     price: {type: Number},
     owner: {type:String, required: true}
-},{collection: "products"})
+})
 
 const Product=mongoose.model("products", ProductSchema, "products")
 module.exports=Product

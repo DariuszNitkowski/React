@@ -29,7 +29,7 @@ const OffersBody = (match) => {
 
     console.log("w ofersbody")
     return ( 
-        <div className="body">
+        <div id="body">
             {/* <table id="products"><thead><tr><th>nazwa produktu</th><th>opis</th><th>foto</th><th>cena</th>
             <th>Items</th>{logged?<th>Kup</th>:null}
             </tr></thead>

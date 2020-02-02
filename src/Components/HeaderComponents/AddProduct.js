@@ -43,14 +43,16 @@ const AddProduct = (match) => {
 
 
     return ( 
-        <div className="body">
+        <div id="body">
+            {logged?<>
             <form name="productForm" onSubmit={addProduct}>
                 <input name="productName" type="text" placeholder="name of product"/> <input name="productVol" type="number" 
                 placeholder="items?" min={1}/><select name="category"><option>What is your category?</option><option>ssanie pałki</option></select>
                 <textarea placeholder="please describe your product" name="productDescr"/><input type="text" 
                 placeholder="what is a price for signle item" name="productPrice"/><button>Add product</button>
             </form>
-            {message}
+            <div id="userMSG">{message}</div></>:
+            <div id="pageMsg">You need to log in</div>}
          </div>   
      );
 }

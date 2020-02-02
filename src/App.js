@@ -9,6 +9,8 @@ import Basket from "./Components/HeaderComponents/Basket"
 import AddProduct from "./Components/HeaderComponents/AddProduct"
 import Payment from "./Components/HeaderComponents/Payment"
 import User from "./Components/HeaderComponents/User"
+import Sell from "./Components/HeaderComponents/Sell"
+
 import "./App.css"
 
 
@@ -18,13 +20,13 @@ import "./App.css"
 function App() {
   
   const [userState, setUserState]=useState({
-    logged: true,
+    logged: false,
     isLogin: false,
-    email:"zmienione na krótko żeby móc testować",
+    email:"",
     userName: "",
-    shoppingList:[{id:"a", name: "wiertarka", vol: 1, price: 120}, {id:"aa", name: "podpaska", vol: 2, price: 12}],
-    message: ""})
-
+    shoppingList:[],
+    own: []})
+    // {id:"a", name: "wiertarka", vol: 1, price: 120}, {id:"aa", name: "podpaska", vol: 2, price: 12}
   console.log("w głównym")
   return (
     <>
@@ -33,11 +35,12 @@ function App() {
         <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
-        <Route path="/create" component={CreateAccountBody}/>
+        <Route path="/create" render={props=>(<CreateAccountBody userState={userState}/>)}/>
         <Route path="/addproduct" render={props=>(<AddProduct {...props} userState={userState}/>)}/>
+        <Route path="/sell" render={props=>(<Sell {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
-        <Route path="/user" component={User}/>
+        <Route path="/user" render={props=>(<User userState={userState}/>)}/>
         <Route path="/" component={Footer}/>
         
       </Router>
