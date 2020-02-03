@@ -1,19 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {withRouter} from "react-router"
-
+import axios from "axios"
 
 const Basket = (props) => {
     
+    const [message, setMessage]=useState("")
     
-    const {shoppingList, logged}=props.userState
+    const {shoppingList, logged, email}=props.userState
     
     const handleDelte=(id)=>{
-        props.setUserState((prevState=>({
-            ...prevState,
-            shoppingList: shoppingList.filter(item=>item.id!==id)
-        })))
-    }
-
+        let newShoppingList=shoppingList.filter(item=>item._id!==id)
+        axios
+        .post("http://localhost:5000/user/updateShopList", {user: email, shopList: newShoppingList})
+        .then((res)=>{
+            props.setUserState((prevState)=>({
+                ...prevState,
+                shoppingList: newShoppingList}))    
+        })
+        .catch(()=>setMessage("Cant connect to delete item"))
+        }
     const handlePay=()=>{
         props.history.push({pathname: "/payment"})
     }
@@ -29,7 +34,7 @@ const Basket = (props) => {
                 <button onClick={()=>handleDelte(item.id)}>Delete</button></td></tr>)}</tbody>
     </table><div><button id="payBtn" onClick={handlePay}>Pay for items</button></div></>: 
     <div id="pageMsg">No items in your basket</div>}</>:<div id="pageMsg">You need to log in</div>} 
-    
+    <div id="userMSG">{message}</div>
     </div>
      );
 }

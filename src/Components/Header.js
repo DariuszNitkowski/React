@@ -21,7 +21,7 @@ const Header = (match) => {
                 <div><Link to="/sell">My sell</Link></div>
                 <div id="divider">_____________</div>
                 <div><Link to="/"
-                     onClick={()=>match.setUserState({logged: false})}>{userName} Logout</Link></div>
+                     onClick={()=>match.setUserState({logged: false})}>{userName.substr(0,10)} Logout</Link></div>
                 
                 </div>
                 </div>

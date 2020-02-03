@@ -11,7 +11,7 @@ const uri = process.env.uri
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect(uri, {useCreateIndex: true, useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(uri, {useCreateIndex: true, useNewUrlParser:true, useUnifiedTopology:true, useFindAndModify:false})
 
 const connection=mongoose.connection
 

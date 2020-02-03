@@ -30,38 +30,21 @@ ProductRouter.route("/delete/:id").delete((req, res)=>{
     .catch(err=>res.send(err))
 })
 
-ProductRouter.route("/update/:id").post((req, res)=>{
-    Product.findById(req.params.id)
-    .then(product=>{
-        let {name, vol, description, category, keywords, price}=req.body
-        product.name=name
-        product.vol=vol
-        product.description=description
-        product.category=category
-        let newKeywords=[]
-        newKeywords.push(name, description, category)
-        product.keywords=newKeywords
-        product.price=price
-        product.save()
-        .then(res=>send.json(res))
-        .catch(err=>res.send(err))
-    })
-    .catch(err=>send.json(err))
-})
+ProductRouter.route("/edit").post((req, res)=>{
+    let {id, name, vol, description, category, keywords, price}=req.body
+    Product.findByIdAndUpdate(id, {name: name, vol:vol, description: description, category: category, keywords: keywords,
+        price:price}, (err, doc)=>{
+            if (err) console.log("coś nie halo w updejcie produktu")
+            else res.json(doc)})})
+        
 
-ProductRouter.route("/list/:adres").get((req, res)=>{
-    Product.find({ owner: { $in: req.params.adres}})
+
+ProductRouter.route("/list/:email").get((req,res)=>{
     
-    // query.where({_id: req.body.own})
-    // Product.find({_id: "5e36c261fe0f840a44f7a9b8"})
-        // { $in: ["5e36c261fe0f840a44f7a9b8", "5e36c76986669f0cWW98964b8f"]} })
-    .then(product=>res.send(product))
-    .catch(err=>res.json(err))
-
-    
-
+    Product.find({owner:req.params.email})
+    .then(products=>res.send(products))
+    .catch(err=>res.send(err))
 })
-
 
 
 

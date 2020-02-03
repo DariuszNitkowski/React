@@ -11,14 +11,6 @@ UserRouter.route("/:email").get((req,res)=>{
 })
 
 
-
-UserRouter.route("/").get((req,res)=>{
-    User.find()
-
-    .then(user=>res.send(user))
-    .catch(err=>res.json(err))
-})
-
 UserRouter.route("/add").post((req,res)=>{
     let {name, password, email} = req.body
     let shoppingList=[]
@@ -27,11 +19,13 @@ UserRouter.route("/add").post((req,res)=>{
     newUser.save()
     .then(()=>res.json("user added"))
     .catch((err)=>res.json("cant add this user"))
-
-
-
-
-
 })
+
+UserRouter.route("/updateShopList").post((req,res)=>{
+    User.findOneAndUpdate({email: req.body.user}, {$set:{shoppingList:req.body.shopList}}, (err, doc)=>{
+        if (err) console.log("coś nie halo")
+        else send.json(doc)})})
+    
+    
 
 module.exports=UserRouter

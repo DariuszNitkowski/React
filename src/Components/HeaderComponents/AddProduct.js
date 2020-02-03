@@ -32,14 +32,6 @@ const AddProduct = (match) => {
             .post("http://localhost:5000/product/add", newProduct)
             .then((res)=>{
                 setMessage("Product added")
-                let id=res.data._id
-                let newOwn=own
-                newOwn.push(id)
-                match.setUserState((prevState=>({
-                    ...prevState,
-                    own: newOwn})))
-                // tutaj muszę koniecznie zrobić updejt bazy danych o tej liste właśnie poszerzoną bo narazie
-                //jest tylko w state i powinna byc gitara
                 setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
             .catch(()=>setMessage("Cant add product, try again"))
         }

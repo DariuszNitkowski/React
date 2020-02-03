@@ -7,7 +7,7 @@ const UserSchema=new Schema({
     name: {type: String, required: true, maxlength: 16},
     password: {type: String, minlength:6, required: true},
     shoppingList: {type: Array},
-    own: {type: Array}
+    
 }, {collection: "users"})
 
 
