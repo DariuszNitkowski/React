@@ -39,6 +39,7 @@ function App() {
   //ogarniecie tej reklamy albo wyjebanie tego
   //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
+  // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
   
   
   console.log("w głównym")

@@ -52,7 +52,8 @@ const CreateAccountBody = (match) => {
     
 
     
-    return ( 
+    return ( <>
+        <div id="userMsg"><ul>{message.map(err=><li key={err}>{err}</li>)}</ul></div>
         <div id="body">
             {match.userState.logged?<div id="pageMsg"> to create account please log out</div> :
             <>
@@ -65,10 +66,11 @@ const CreateAccountBody = (match) => {
                     <input type="password" name="password" placeholder="what will be your password"/></div>
                 <div><input type="password" name="passwordConfirmation" placeholder="please confirm password"/></div>
                 <button type="submit">Create new user</button>
-                <div id="userMSG"><ul>{message.map(err=><li key={err}>{err}</li>)}</ul></div>
+                
 
             </form></>}
             </div>
+            </>
      );
 }
  

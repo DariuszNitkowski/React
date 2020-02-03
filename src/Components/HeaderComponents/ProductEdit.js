@@ -47,21 +47,22 @@ const ProductEdit = (match) => {
 }
     
     console.log("jestem w edit body")
-    return ( 
+    return ( <>
+        <div id="userMsg">{message}</div>
         <div id="body"> 
             <div id="body">
-            {logged?<>
+            {logged?
             <form name="productForm" onSubmit={saveChanges}>
                 <input name="name" type="text" value={name} onChange={handleChanges}/> <input name="vol" type="number" 
                 value={vol} min={1} onChange={handleChanges}/><select name="category" onChange={handleChanges}><option>{category}</option><option>ssanie pałki</option></select>
                 <textarea value={description} onChange={handleChanges} name="description"/><input type="text" 
                 value={price} onChange={handleChanges} name="price"/><button>Save changes</button>
             </form>
-            <div id="userMSG">{message}</div></>:
+            :
             <div id="pageMsg">You need to log in</div>}
          </div>   
         
-        </div>
+        </div></>
      );
 }
  

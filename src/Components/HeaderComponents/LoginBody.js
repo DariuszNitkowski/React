@@ -52,7 +52,8 @@ const LoginBody = (match) => {
     
     
     console.log("w login body")
-    return ( 
+    return ( <>
+        <div id="userMsg">{logMessage}</div>
         <div id="body">
             {logged?<div id="pageMsg">You are logged already</div>:
             <>
@@ -61,13 +62,11 @@ const LoginBody = (match) => {
             <div>password<input type="text" name="pass"/></div>
             <div><button type="submit">Login</button></div>
             </form>
-            <div id="userMSG">{logMessage}</div>
+            
         
             <div><Link to="/create">Utwórz konto</Link></div>
             </>}
-            
-       
-        </div>
+        </div></>
      );
 }
  

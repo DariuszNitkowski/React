@@ -36,6 +36,14 @@ ProductRouter.route("/edit").post((req, res)=>{
         price:price}, (err, doc)=>{
             if (err) console.log("coś nie halo w updejcie produktu")
             else res.json(doc)})})
+
+ProductRouter.route("/changevol").post((req,res)=>{
+    let {id, vol}=req.body
+    Product.findByIdAndUpdate(id, {vol: vol}, (err, doc)=>{
+        if (err) console.log("something wrong")
+        else res.json(doc)
+    })
+})
         
 
 
