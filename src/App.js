@@ -11,6 +11,7 @@ import Payment from "./Components/HeaderComponents/Payment"
 import User from "./Components/HeaderComponents/User"
 import Sell from "./Components/HeaderComponents/Sell"
 import ProductEdit from "./Components/HeaderComponents/ProductEdit"
+import DisplayProduct from "./Components/HeaderComponents/DisplayProduct"
 import "./App.css"
 
 
@@ -34,6 +35,7 @@ function App() {
     passedObject=object
   }
   // do zrobienia: wpływ na volumen po kupnie i anulowaniu kupna
+  //nowy komponent single product wiec link z basketa zeby otworzyc dany produkt ale tez z sella
   // search z headera i kategorii
   // wyswietlanie ogolnej listy sprzedazy na poczatku strony
   //ogarniecie tej reklamy albo wyjebanie tego
@@ -57,6 +59,7 @@ function App() {
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
         <Route path="/user" render={props=>(<User userState={userState}/>)}/>
         <Route path="/editproduct" render={props=>(<ProductEdit passedObject={passedObject} userState={userState}/>)}/>
+        <Route path="/singleproduct" render={props=>(<DisplayProduct userState={userState}/>)}/>
         <Route path="/" component={Footer}/>
         
       </Router>

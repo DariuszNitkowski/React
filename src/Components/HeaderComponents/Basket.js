@@ -5,27 +5,31 @@ import axios from "axios"
 const Basket = (props) => {
     
     const [message, setMessage]=useState("")
-    
-    const {shoppingList, logged, email}=props.userState
-    
+    const {logged, shoppingList, email}=props.userState 
+
     const handleDelte=(id)=>{
-        let newShoppingList=shoppingList.filter(item=>item._id!==id)
-        // axios
-        // .post("http://localhost:5000/product/changevol", {id: id, vol: vol})
-        
+        let volToDelete=(shoppingList.find(item=>item.id==id)).vol
+        let newProductData={id: id, vol: volToDelete}
         axios
-        .post("http://localhost:5000/user/updateShopList", {user: email, shopList: newShoppingList})
+        .post("http://localhost:5000/product/changevol", newProductData)
         .then((res)=>{
-            props.setUserState((prevState)=>({
-                ...prevState,
-                shoppingList: newShoppingList}))    
-        })
+            let newShoppingList=shoppingList.filter(item=>item._id!==id)
+            axios
+            .post("http://localhost:5000/user/updateShopList", {user: email, shopList: newShoppingList})
+            .then((res)=>{
+                props.setUserState((prevState)=>({
+                    ...prevState,
+                    shoppingList: newShoppingList}))    
+            })
+            .catch(()=>setMessage("Cant connect to delete item"))
+            })
         .catch(()=>setMessage("Cant connect to delete item"))
         }
-    const handlePay=()=>{
-        props.history.push({pathname: "/payment"})
-    }
+
+
+    const handlePay=()=>{props.history.push({pathname: "/payment"})}
     
+        
     console.log("w basket")
     return ( <>
             <div id="userMsg">{message}</div>
@@ -41,6 +45,6 @@ const Basket = (props) => {
                 <div id="pageMsg">No items in your basket</div>}</>:<div id="pageMsg">You need to log in</div>} 
     </div></>
      );
-}
+    }
 
 export default withRouter(Basket);

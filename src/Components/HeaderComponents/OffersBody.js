@@ -23,18 +23,18 @@ const OffersBody = (match) => {
         currentVol=[...oldVol, newElement]
         }
 
-    const handleBuy=(id)=>{
+    const handleBuy=(id, name, price)=>{
         setMessage("")
         let itemBought=currentVol.filter(item=>Object.keys(item)==id)[0]
         if(!itemBought) setMessage("Please choose volume of item")
         else {
-            let productNewVol=(products.find(o=>o.id==id)).vol-itemBought[id]
-            let newProductData={id: id, vol: productNewVol}
+            let newProductData={id: id, vol: -itemBought[id]}
             axios
             .post("http://localhost/product/changevol", newProductData)
             .then(()=>{
                 let oldShoppingList=shoppingList
-                let newShoppingList=[...oldShoppingList, id]
+                let newProductBought={id: id, name: name, vol: itemBought[id], price: price}
+                let newShoppingList=[...oldShoppingList, newProductBought]
                 axios
                 .post("http://localhost:5000/user/updateShopList", {user: email, shopList: newShoppingList})
                 .then((res)=>{
@@ -62,7 +62,7 @@ const OffersBody = (match) => {
             <tbody>{products.map((item=>item.vol!=0?<tr key={item.id}><td className="tableName">{item.name}</td><td className="tableDescr">
             {item.description}</td><td className="tableImg"><img src={item.image} className="productImageMedium"/></td>
             <td className="tablePrice">{item.price} PLN</td><td className="tableVol"><input type="number" name={item.id} onChange={handleBidChange} placeholder="?" min={1} max={item.vol} maxLength={6}/></td>
-            {logged?<td className="tableBuy"><button className="buyBtn" onClick={()=>handleBuy(item.id)}>Buy</button></td>:null}</tr>
+            {logged?<td className="tableBuy"><button className="buyBtn" onClick={()=>handleBuy(item.id, item.name, item.price)}>Buy</button></td>:null}</tr>
             :null))}
             </tbody>
             </table> 
