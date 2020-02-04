@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {withRouter} from "react-router"
+import {Link} from "react-router-dom"
 import axios from "axios"
 
 
@@ -8,15 +9,25 @@ var currentVol=[]
 
 const OffersBody = (match) => {
     const [message, setMessage]=useState("")
-    const {email, shoppingList}=match.userState
-    // const [products, setProducts]=useState([])
-    const logged=true
-    const products=[{id: "blaba", name: "wiertarka", description: "takie tam gówno", image:"", price: 20, vol:3},
-    {id: "laba", name: "podpaska", description: "higiena dla pań", image:"", price: 120, vol:5},
-    {id: "ablaba", name: "cos tam innego", description: "takie tam gówno", image:"", price: 1, vol:300},
-    {id: "fflaba", name: "strzałka", description: "nie wiadomo dla kogo to wogóle", image:"", price: 500, vol:500}]
+    const {logged, email, shoppingList}=match.userState
+    const [products, setProducts]=useState([])
     
     
+    
+    const showProducts=()=>{
+        axios.get("http://localhost:5000/product")
+        .then(res=>{
+            setProducts(res.data)
+        })
+        .catch(()=>setMessage("Cant get products"))
+    }
+
+    const showSingleProduct=(id)=>{
+        let productChosen=products.find((item)=>item._id==id)
+        match.passData(productChosen)
+        match.history.push({pathname:"/singleproduct"})
+    }
+
     const handleBidChange=(e)=>{
         let newElement={[e.target.name]: e.target.value}
         let oldVol=currentVol.filter(item=>Object.keys(item)!=e.target.name)
@@ -30,7 +41,7 @@ const OffersBody = (match) => {
         else {
             let newProductData={id: id, vol: -itemBought[id]}
             axios
-            .post("http://localhost/product/changevol", newProductData)
+            .post("http://localhost:5000/product/changevol", newProductData)
             .then(()=>{
                 let oldShoppingList=shoppingList
                 let newProductBought={id: id, name: name, vol: itemBought[id], price: price}
@@ -40,7 +51,10 @@ const OffersBody = (match) => {
                 .then((res)=>{
                     match.setUserState((prevState)=>({
                         ...prevState,
-                        shoppingList: newShoppingList}))    
+                        shoppingList: newShoppingList}))
+                    products.find(item=>item._id==id).vol+=-itemBought[id]
+                     
+                    setMessage("You have just bought item")   
                 })
                 .catch(()=>setMessage("Something went wrong, probably connection"))
             })
@@ -56,17 +70,16 @@ const OffersBody = (match) => {
     return ( <>
         <div id="userMsg">{message}</div>
         <div id="body">
-            <table id="products"><thead><tr><th>nazwa produktu</th><th>opis</th><th>foto</th><th>cena</th>
-            <th>Items</th>{logged?<th>Kup</th>:null}
-            </tr></thead>
-            <tbody>{products.map((item=>item.vol!=0?<tr key={item.id}><td className="tableName">{item.name}</td><td className="tableDescr">
-            {item.description}</td><td className="tableImg"><img src={item.image} className="productImageMedium"/></td>
-            <td className="tablePrice">{item.price} PLN</td><td className="tableVol"><input type="number" name={item.id} onChange={handleBidChange} placeholder="?" min={1} max={item.vol} maxLength={6}/></td>
-            {logged?<td className="tableBuy"><button className="buyBtn" onClick={()=>handleBuy(item.id, item.name, item.price)}>Buy</button></td>:null}</tr>
-            :null))}
-            </tbody>
-            </table> 
+            <div id="products">
             
+            {products.map((item=>item.vol!=0?<div className="row" key={item._id}><Link to="/singleproduct" onClick={()=>showSingleProduct(item._id)}><div className="tableName">{item.name}</div><div className="tableDescr">
+            {item.description}</div><div className="tableImg"><img src={item.image} className="productImageMedium"/></div>
+            <div className="tablePrice">{item.price} PLN</div></Link><div className="tableVol"><input type="number" name={item._id} onChange={handleBidChange} placeholder="?" min={1} max={item.vol} maxLength={6}/></div>
+            {logged?<div className="tableBuy"><button className="buyBtn" onClick={()=>handleBuy(item._id, item.name, item.price)}>Buy</button></div>:null}</div>
+            :null))}
+            </div>
+            {true?<button onClick={showProducts}>Show products</button>:null}
+            <button onClick={showSingleProduct}>go to single product page</button>
         </div></>
      );
 }

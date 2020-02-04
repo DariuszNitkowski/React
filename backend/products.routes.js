@@ -39,7 +39,7 @@ ProductRouter.route("/edit").post((req, res)=>{
 
 ProductRouter.route("/changevol").post((req,res)=>{
     let {id, vol}=req.body
-    Product.findByIdAndUpdate(id, {vol: vol}, (err, doc)=>{
+    Product.findByIdAndUpdate(id, {$inc : {vol: vol}}, (err, doc)=>{
         if (err) console.log("something wrong")
         else res.json(doc)
     })

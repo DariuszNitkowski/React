@@ -34,32 +34,32 @@ function App() {
   const passData=(object)=>{
     passedObject=object
   }
-  // do zrobienia: wpływ na volumen po kupnie i anulowaniu kupna
-  //nowy komponent single product wiec link z basketa zeby otworzyc dany produkt ale tez z sella
+  // do zrobienia: 
   // search z headera i kategorii
   // wyswietlanie ogolnej listy sprzedazy na poczatku strony
   //ogarniecie tej reklamy albo wyjebanie tego
   //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
+  
+  //do zbadania
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
-  
-  
+  //nowy komponent single product wiec link z basketa zeby otworzyc dany produkt ale tez z sella
   console.log("w głównym")
   return (
     <>
 
       <Router >
         <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState}/>)}/>
-        <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState}/>)}/>
+        <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState} passData={passData}/>)}/>
         <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/create" render={props=>(<CreateAccountBody userState={userState}/>)}/>
         <Route path="/addproduct" render={props=>(<AddProduct {...props} userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/sell" render={props=>(<Sell {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
-        <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState}/>)}/>
+        <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
         <Route path="/user" render={props=>(<User userState={userState}/>)}/>
         <Route path="/editproduct" render={props=>(<ProductEdit passedObject={passedObject} userState={userState}/>)}/>
-        <Route path="/singleproduct" render={props=>(<DisplayProduct userState={userState}/>)}/>
+        <Route path="/singleproduct" render={props=>(<DisplayProduct userState={userState} passedObject={passedObject}/>)}/>
         <Route path="/" component={Footer}/>
         
       </Router>

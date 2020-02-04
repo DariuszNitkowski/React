@@ -4,7 +4,7 @@ const Schema=mongoose.Schema
 
 const ProductSchema=new Schema({
     name: {type: String, required:true},
-    vol: {type:Number, required:true},
+    vol: {type:Number, required:true, min: 1},
     description:{type: String, required:true, maxlength:50},
     category: {type: String, required:true},
     keywords: {type:Array},

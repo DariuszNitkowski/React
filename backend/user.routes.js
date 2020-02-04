@@ -24,7 +24,7 @@ UserRouter.route("/add").post((req,res)=>{
 UserRouter.route("/updateShopList").post((req,res)=>{
     User.findOneAndUpdate({email: req.body.user}, {$set:{shoppingList:req.body.shopList}}, (err, doc)=>{
         if (err) console.log("coś nie halo")
-        else send.json(doc)})})
+        else res.send(doc)})})
     
     
 
