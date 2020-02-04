@@ -3,15 +3,17 @@ import {withRouter} from "react-router"
 import axios from 'axios';
 
 const ProductEdit = (match) => {
+    let passedData=match.passedObject
+    console.log(passedData.length>0, passedData)
     const logged=match.userState.logged    
     const [message, setMessage]=useState("")
     const [editedProduct, setEditedProduct]=useState({
-        id: match.passedObject._id,
-        name: match.passedObject.name,
-        vol: match.passedObject.vol,
-        description: match.passedObject.description,
-        category: match.passedObject.category,
-        price: match.passedObject.price
+        id: passedData.length>0?passedData[0]._id:null,
+        name: passedData.length>0?match.passedObject[0].name:null,
+        vol: passedData.length>0?passedData[0].vol:null,
+        description: passedData.length>0?passedData[0].description:null,
+        category: passedData.length>0?passedData[0].category: null,
+        price: passedData.length>0?passedData[0].price:null
     })
     const {id, name, vol, description, category, price}=editedProduct
     

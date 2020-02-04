@@ -24,7 +24,7 @@ const OffersBody = (match) => {
 
     const showSingleProduct=(id)=>{
         let productChosen=products.find((item)=>item._id==id)
-        match.passData(productChosen)
+        match.passData(productChosen, "")
         match.history.push({pathname:"/singleproduct"})
     }
 
@@ -44,7 +44,7 @@ const OffersBody = (match) => {
             .post("http://localhost:5000/product/changevol", newProductData)
             .then(()=>{
                 let oldShoppingList=shoppingList
-                let newProductBought={id: id, name: name, vol: itemBought[id], price: price}
+                let newProductBought={_id: id, name: name, vol: itemBought[id], price: price}
                 let newShoppingList=[...oldShoppingList, newProductBought]
                 axios
                 .post("http://localhost:5000/user/updateShopList", {user: email, shopList: newShoppingList})
@@ -72,12 +72,14 @@ const OffersBody = (match) => {
         <div id="body">
             <div id="products">
             
-            {products.map((item=>item.vol!=0?<div className="row" key={item._id}><Link to="/singleproduct" onClick={()=>showSingleProduct(item._id)}><div className="tableName">{item.name}</div><div className="tableDescr">
+            {products.map((item=>item.vol!=0?<div className="row" key={item._id}><Link to="/singleproduct" onClick={()=>showSingleProduct(item._id)}>
+            <div className="tableName">{item.name}</div><div className="tableDescr">
             {item.description}</div><div className="tableImg"><img src={item.image} className="productImageMedium"/></div>
-            <div className="tablePrice">{item.price} PLN</div></Link><div className="tableVol"><input type="number" name={item._id} onChange={handleBidChange} placeholder="?" min={1} max={item.vol} maxLength={6}/></div>
-            {logged?<div className="tableBuy"><button className="buyBtn" onClick={()=>handleBuy(item._id, item.name, item.price)}>Buy</button></div>:null}</div>
-            :null))}
-            </div>
+            <div className="tablePrice">{item.price} PLN</div></Link>
+            {logged?<><div className="tableVol"><input type="number" name={item._id} onChange={handleBidChange} placeholder="?" 
+            min={1} max={item.vol} maxLength={6}/></div><div className="tableBuy">
+            <button className="buyBtn" onClick={()=>handleBuy(item._id, item.name, item.price)}>Buy</button></div></>:null}
+            </div>:null))}</div>
             {true?<button onClick={showProducts}>Show products</button>:null}
             <button onClick={showSingleProduct}>go to single product page</button>
         </div></>

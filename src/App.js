@@ -31,7 +31,7 @@ function App() {
     own: []})
   
     
-  const passData=(object)=>{
+  const passData=(...object)=>{
     passedObject=object
   }
   // do zrobienia: 
@@ -41,9 +41,10 @@ function App() {
   //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
   
-  //do zbadania
+  //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
-  //nowy komponent single product wiec link z basketa zeby otworzyc dany produkt ale tez z sella
+  // do poprawienia:
+  // w sell zeby wyswietlało od razu moje oferty bez przycisku pokaz selle
   console.log("w głównym")
   return (
     <>
@@ -58,7 +59,7 @@ function App() {
         <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
         <Route path="/user" render={props=>(<User userState={userState}/>)}/>
-        <Route path="/editproduct" render={props=>(<ProductEdit passedObject={passedObject} userState={userState}/>)}/>
+        <Route path="/editproduct" render={props=>(<ProductEdit userState={userState} passedObject={passedObject}/>)}/>
         <Route path="/singleproduct" render={props=>(<DisplayProduct userState={userState} passedObject={passedObject}/>)}/>
         <Route path="/" component={Footer}/>
         

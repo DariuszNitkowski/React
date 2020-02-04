@@ -23,18 +23,26 @@ const Sell = (props) => {
         })
         .catch(err=>console.log("jakis błąd"))
     }
-    const handleEdit=(id)=>{
-        let editedProduct=myProducts.find(ele=>ele._id===id)
-        props.passData(editedProduct)
+    const handleEdit=(product)=>{
+        // let editedProduct=myProducts.find(ele=>ele._id===id)
+        props.passData(product)
         props.history.push({pathname:"/editproduct"})
+    }
+
+    const showSingleProduct=(product)=>{
+        props.passData(product, "sell")
+        props.history.push({pathname:"/singleproduct"})
+
     }
     console.log("jestem w sell")
 
     return ( 
         <div id="body">
             <div>{myProducts.length>0?<ul>{myProducts.map(item=><li key={item._id}>{item.name}{item.price}
-            <button onClick={()=>handleEdit(item._id)}>Edit</button>
-            <button onClick={()=>handleDelete(item._id)}>Delete</button></li>)}</ul>:null}</div>
+            <button onClick={()=>handleEdit(item)}>Edit</button>
+            <button onClick={()=>handleDelete(item._id)}>Delete</button>
+            <button onClick={()=>showSingleProduct(item)}>Display this offer</button>
+            </li>)}</ul>:null}</div>
             
             {logged?<>
                 <button onClick={showSell}>Show your sell offers</button>

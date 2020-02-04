@@ -196,6 +196,9 @@ a :visited{
 .basketBtn button{
     padding:10px;
 }
+.basketProdBtn button{
+    padding:10px; 
+}
 
 #payBtn{
     padding: 20px;
@@ -260,3 +263,6 @@ Link{
 #myOffers{
     transform: translateY(50px)
 }
+
+
+/* singleProduct, spName, spImage, spDescription, spVol, spPrice, spBuyBtn, spBack */
