@@ -4,7 +4,7 @@ const Categories = React.memo(() => {
     
     console.log("w categories")
 
-    return ( <div className="categories">
+    return ( <div id="categories">
         <select>
         <option>choose category</option>
             <option>ogrodnicotwo</option>

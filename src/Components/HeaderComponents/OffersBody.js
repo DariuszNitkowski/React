@@ -11,16 +11,25 @@ const OffersBody = (match) => {
     const [message, setMessage]=useState("")
     const {logged, email, shoppingList}=match.userState
     const [products, setProducts]=useState([])
+    console.log(match.passedObject[0])
     
+    if (match.passedObject) {
+            let query= `${match.passedObject[0].kind}:${match.passedObject[0].search}`
+            axios
+            .get(`http://localhost:5000/product/search/${query}`)
+            .then((res)=>{
+                if (res.data==0) setMessage("No results")
+                else setProducts(res.data)})
+            .catch(()=>setMessage("Cant load products"))}
+          
+
+    // else {
+    //     axios.get("http://localhost:5000/product")
+    //     .then(res=>{
+    //         setProducts(res.data)
+    //     })
+    //     .catch(()=>setMessage("Cant get products"))}
     
-    
-    const showProducts=()=>{
-        axios.get("http://localhost:5000/product")
-        .then(res=>{
-            setProducts(res.data)
-        })
-        .catch(()=>setMessage("Cant get products"))
-    }
 
     const showSingleProduct=(id)=>{
         let productChosen=products.find((item)=>item._id==id)
@@ -80,8 +89,7 @@ const OffersBody = (match) => {
             min={1} max={item.vol} maxLength={6}/></div><div className="tableBuy">
             <button className="buyBtn" onClick={()=>handleBuy(item._id, item.name, item.price)}>Buy</button></div></>:null}
             </div>:null))}</div>
-            {true?<button onClick={showProducts}>Show products</button>:null}
-            <button onClick={showSingleProduct}>go to single product page</button>
+            
         </div></>
      );
 }

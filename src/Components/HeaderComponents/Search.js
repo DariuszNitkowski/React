@@ -4,7 +4,7 @@ const Search = React.memo(() => {
     
     console.log("w search")
     return ( 
-        <div className="search">
+        <div id="search">
             <input type="text" placeholder="search for products"/>
             </div>
      );

@@ -7,6 +7,10 @@ const Sell = (props) => {
     const[myProducts, setMyProducts]=useState([])
     
     
+    const showSingleProduct=(product)=>{
+        props.passData(product, "sell")
+        props.history.push({pathname:"/singleproduct"})}
+        
     const showSell=()=>{
         axios
         .get(`http://localhost:5000/product/list/${email}`)
@@ -29,11 +33,6 @@ const Sell = (props) => {
         props.history.push({pathname:"/editproduct"})
     }
 
-    const showSingleProduct=(product)=>{
-        props.passData(product, "sell")
-        props.history.push({pathname:"/singleproduct"})
-
-    }
     console.log("jestem w sell")
 
     return ( 

@@ -51,12 +51,15 @@ a :visited{
 
 
 /* header */
-.search input{
+#search input{
     background-color:cornflowerblue;
     transform: translateX(10px);}
 
+#searchBtn{
+    transform: translateX(20px)
+}
 
-.categories select{
+#categories select{
     background-color: darkred;
     transform: translateX(20px)}
 
@@ -82,7 +85,7 @@ a :visited{
 
 #add{
     background-color: violet;
-    transform: translateX(-100px);
+    transform: translateX(-80px);
     width: 500px;
 }
 /* Offers Body */
@@ -248,8 +251,8 @@ Link{
 
 #userMsg{
     color: yellow;
-    position: absolute;
-    overflow: visible;
+    position: fixed;
+    overflow: hidden;
     width: 100px;
     transform: translateY(5px) translateX(1100px);
     

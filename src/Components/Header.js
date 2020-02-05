@@ -1,17 +1,42 @@
 import React, {useState} from 'react';
-import Search from "./HeaderComponents/Search"
-import Categories from "./HeaderComponents/Categories"
+// import Search from "./HeaderComponents/Search"
+// import Categories from "./HeaderComponents/Categories"
+import {withRouter} from "react-router"
 
 import {Link} from "react-router-dom"
 
 const Header = (match) => {
-    console.log("w header")
     const {logged, shoppingList, userName}=match.userState
+    const [searchingFor, setSearchingFor]=useState({search:"", kind:""})
+    const [kind, setKind]=useState("")
     
+    const handleSearch=(e, type)=>{
+        setSearchingFor({search: e.target.value, kind: type})
+    }
+    const sendSearch=()=>{
+        match.passData(searchingFor)
+        match.history.push({pathname:"/"})
+        setSearchingFor("")
+    }
+    
+    console.log("w header")
     return ( 
         <div className="header">
-            <Search/>
-            <Categories/>
+            <div id="search">
+            <input onChange={(event)=>handleSearch(event, "keywords")}type="text" placeholder="search for products" value={searchingFor.search}/>
+            </div>
+            <div id="categories">
+            <select onChange={(event)=>handleSearch(event, "category")} value={searchingFor.search}>
+            <option>choose category</option>
+                <option>ogr</option>
+                <option>gór</option>
+                <option>grz</option>
+                <option>sra</option>
+                <option>skw</option>
+            </select></div>
+            <div id="searchBtn"><button onClick={sendSearch}>Search</button></div>
+            {/* <Search/> */}
+            {/* <Categories/> */}
             {logged?
             <>
             <div id="dropdown">
@@ -48,4 +73,4 @@ const Header = (match) => {
      );
 }
  
-export default Header;
+export default withRouter(Header);

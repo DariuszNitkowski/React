@@ -5,20 +5,21 @@ let name, description, vol, price, image, gotFrom=""
 const DisplayProduct = (match) => {
     
     let passedData=match.passedObject
-    if (passedData.length>0){
-        name=passedData[0].name
-        description=passedData[0].description
-        vol=passedData[0].vol
+    if (passedData.length>0){ // tutaj trzeba zrobic switcha w zaleznosci czy to pochodzi od offersbody
+        name=passedData[0].name // czy tez basket/sell bo w tym drugim przypadku nie bedzie image i trzeba bedzie
+        description=passedData[0].description// zassac dane. takze tutaj jest bug. moze nie bug bo bedzie undifineg
+        vol=passedData[0].vol// ale nie ma funckji do pobierania brakujacych danych dla basketa i sella 
         price=passedData[0].price
         image=passedData[0].image
         gotFrom=passedData[1]}
         
     const [message, setMessage]=useState("")
     const {logged}=match.userState
-     
+    console.log("jestem w display product", passedData, vol) 
     return ( <>
         <div id="userMsg">{message}</div>
         <div id="body">
+            
             <div id="singleProduct">
             <div id="spName">Nazwa produktu {name}</div>
             <div id="spImage">{image}</div>

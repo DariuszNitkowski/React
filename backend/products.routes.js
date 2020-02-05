@@ -1,11 +1,15 @@
 const ProductRouter=require("express").Router()
 let Product=require("./products.model")
 
-ProductRouter.route("/:search").get((req,res)=>{
-    Product.find({keywords: req.params.search})
-    .then(product=>res.json(product))
-    .catch(err=>res.json(err))
+ProductRouter.route("/search/:search").get((req,res)=>{
+    let query=req.params.search
+    let field=query.slice(0,query.indexOf(":"))
+    let value=query.slice(query.indexOf(":")+1)
+    Product.find({field: {$regex: value, $options: "i"}}, (err, doc)=>{
+        if (err) console.log("something wrong")
+        else res.send(doc)})
 })
+    
 
 
 

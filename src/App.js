@@ -36,22 +36,24 @@ function App() {
   }
   // do zrobienia: 
   // search z headera i kategorii
-  // wyswietlanie ogolnej listy sprzedazy na poczatku strony
   //ogarniecie tej reklamy albo wyjebanie tego
   //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
-  
+  // dodac jednak axiosa w offers body z basketa gdy klikam w display product zeby pobrał zdjecia. 
+  //w sell rozwiazanie problemu wyswietlania twoich produktow z automatu.
+  // tak samo w offersbody, wyswietlanie polecanych produktow
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
   // do poprawienia:
   // w sell zeby wyswietlało od razu moje oferty bez przycisku pokaz selle
+  //pamietaj o usunieciu search i categories component jesli rzeczwyiscie niepotrzene
   console.log("w głównym")
   return (
     <>
 
       <Router >
-        <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState}/>)}/>
-        <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState} passData={passData}/>)}/>
+        <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
+        <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState} passData={passData} passedObject={passedObject}/>)}/>
         <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/create" render={props=>(<CreateAccountBody userState={userState}/>)}/>
         <Route path="/addproduct" render={props=>(<AddProduct {...props} userState={userState} setUserState={setUserState}/>)}/>
