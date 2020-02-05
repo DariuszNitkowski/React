@@ -35,18 +35,21 @@ function App() {
     passedObject=object
   }
   // do zrobienia: 
-  // search z headera i kategorii
+  
   //ogarniecie tej reklamy albo wyjebanie tego
   //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
-  // dodac jednak axiosa w offers body z basketa gdy klikam w display product zeby pobrał zdjecia. 
-  //w sell rozwiazanie problemu wyswietlania twoich produktow z automatu.
   // tak samo w offersbody, wyswietlanie polecanych produktow
+  
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
+  
   // do poprawienia:
   // w sell zeby wyswietlało od razu moje oferty bez przycisku pokaz selle
   //pamietaj o usunieciu search i categories component jesli rzeczwyiscie niepotrzene
+  //moze jakas refaktoryzacja w product edit bo wyglada ciezko
+
+  
   console.log("w głównym")
   return (
     <>

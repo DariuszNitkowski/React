@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {withRouter} from "react-router"
 import {Link} from "react-router-dom"
 import axios from "axios"
@@ -9,27 +9,28 @@ var currentVol=[]
 
 const OffersBody = (match) => {
     const [message, setMessage]=useState("")
-    const {logged, email, shoppingList}=match.userState
     const [products, setProducts]=useState([])
-    console.log(match.passedObject[0])
+    const {logged, email, shoppingList}=match.userState
     
-    if (match.passedObject) {
-            let query= `${match.passedObject[0].kind}:${match.passedObject[0].search}`
-            axios
-            .get(`http://localhost:5000/product/search/${query}`)
-            .then((res)=>{
-                if (res.data==0) setMessage("No results")
-                else setProducts(res.data)})
-            .catch(()=>setMessage("Cant load products"))}
-          
-
-    // else {
-    //     axios.get("http://localhost:5000/product")
-    //     .then(res=>{
-    //         setProducts(res.data)
-    //     })
-    //     .catch(()=>setMessage("Cant get products"))}
-    
+    useEffect(()=>{
+        if (match.passedObject) {
+                let query= `${match.passedObject[0].kind}:${match.passedObject[0].search}`
+                axios
+                .get(`http://localhost:5000/product/search/${query}`)
+                .then((res)=>{
+                    if (res.data==0) {
+                        setMessage("No results")
+                        setProducts([])}
+                    else {
+                        setProducts(res.data)}})
+                .catch(()=>setMessage("Cant load products"))}
+        else {
+            axios.get("http://localhost:5000/product")
+            .then(res=>{
+                setProducts(res.data)
+            })
+            .catch(()=>setMessage("Cant get products"))}
+    },[match.passedObject])
 
     const showSingleProduct=(id)=>{
         let productChosen=products.find((item)=>item._id==id)

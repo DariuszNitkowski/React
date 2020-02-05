@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
-// import Search from "./HeaderComponents/Search"
-// import Categories from "./HeaderComponents/Categories"
 import {withRouter} from "react-router"
-
 import {Link} from "react-router-dom"
 
 const Header = (match) => {
@@ -16,7 +13,7 @@ const Header = (match) => {
     const sendSearch=()=>{
         match.passData(searchingFor)
         match.history.push({pathname:"/"})
-        setSearchingFor("")
+        setSearchingFor({search:"", kind:""})
     }
     
     console.log("w header")
@@ -35,8 +32,6 @@ const Header = (match) => {
                 <option>skw</option>
             </select></div>
             <div id="searchBtn"><button onClick={sendSearch}>Search</button></div>
-            {/* <Search/> */}
-            {/* <Categories/> */}
             {logged?
             <>
             <div id="dropdown">

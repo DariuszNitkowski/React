@@ -6,9 +6,16 @@ const DisplayProduct = (match) => {
     
     let passedData=match.passedObject
     if (passedData.length>0){ // tutaj trzeba zrobic switcha w zaleznosci czy to pochodzi od offersbody
-        name=passedData[0].name // czy tez basket/sell bo w tym drugim przypadku nie bedzie image i trzeba bedzie
-        description=passedData[0].description// zassac dane. takze tutaj jest bug. moze nie bug bo bedzie undifineg
-        vol=passedData[0].vol// ale nie ma funckji do pobierania brakujacych danych dla basketa i sella 
+        switch (passedData[1]){
+        case "basket" || "sell":
+            // pobierz produkt z serwera
+            break
+        case "":
+            załaduj dane przekazane
+        
+        name=passedData[0].name 
+        description=passedData[0].description
+        vol=passedData[0].vol
         price=passedData[0].price
         image=passedData[0].image
         gotFrom=passedData[1]}

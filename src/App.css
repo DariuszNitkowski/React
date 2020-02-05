@@ -252,7 +252,7 @@ Link{
 #userMsg{
     color: yellow;
     position: fixed;
-    overflow: hidden;
+    z-index: -1;
     width: 100px;
     transform: translateY(5px) translateX(1100px);
     
@@ -263,9 +263,16 @@ Link{
     transform: translateY(40px);
 }
 
-#myOffers{
+#addProductBtn{
     transform: translateY(50px)
 }
 
 
 /* singleProduct, spName, spImage, spDescription, spVol, spPrice, spBuyBtn, spBack */
+/* 
+sellTitle
+sellName
+sellPrice
+sellEditBtn
+sellDeleteBtn
+sellDisplayBtn */
