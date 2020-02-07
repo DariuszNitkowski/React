@@ -45,8 +45,6 @@ function App() {
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
   
   // do poprawienia:
-  // w sell zeby wyswietlało od razu moje oferty bez przycisku pokaz selle
-  //pamietaj o usunieciu search i categories component jesli rzeczwyiscie niepotrzene
   //moze jakas refaktoryzacja w product edit bo wyglada ciezko
 
   

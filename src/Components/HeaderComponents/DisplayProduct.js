@@ -6,12 +6,12 @@ const DisplayProduct = (match) => {
     
     let passedData=match.passedObject
     if (passedData.length>0){ // tutaj trzeba zrobic switcha w zaleznosci czy to pochodzi od offersbody
-        switch (passedData[1]){
-        case "basket" || "sell":
-            // pobierz produkt z serwera
-            break
-        case "":
-            załaduj dane przekazane
+        // switch (passedData[1]){
+        // case "basket" || "sell":
+        //     // pobierz produkt z serwera
+        //     break
+        // case "":
+        //     załaduj dane przekazane
         
         name=passedData[0].name 
         description=passedData[0].description
@@ -26,7 +26,7 @@ const DisplayProduct = (match) => {
     return ( <>
         <div id="userMsg">{message}</div>
         <div id="body">
-            
+        
             <div id="singleProduct">
             <div id="spName">Nazwa produktu {name}</div>
             <div id="spImage">{image}</div>
