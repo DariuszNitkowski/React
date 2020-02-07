@@ -5,7 +5,7 @@ import {withRouter} from "react-router"
 var file1=""
 var file2=""
 var file3=""
-
+var links=[]
 const AddProduct = (match) => {
     
     const [foto, setFoto]=useState({"first":"","second":"","third":""})
@@ -69,20 +69,15 @@ const AddProduct = (match) => {
     
     const loadImg =event=>{
         event.preventDefault()
-        let fotka=new FormData()
-        // let blob= fetch(foto).then(r=>r.blob())
-        let fotos=[file1, file2, file3]
+        let singleFileImg=new FormData()
+        let fotos=[file1, file2, file3].filter(item=>item!="")
         for (let foto of fotos){
-            console.log(foto)
+            singleFileImg.append("upload_preset", "cloudinary_place")
+            singleFileImg.append("file", foto)
+            axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", singleFileImg)
+            .then((res)=>links.append(res.data.url))
+            .catch(()=>setMessage("Couldnt add image"))}
         }
-
-        //przesniecie zdjecia na index 0 jesli index 0 jest pusty. z dwójki a jesli tez pusta to z 3ki.
-        // fotka.append("upload_preset", "cloudinary_place")
-        // fotka.append("file", file1)
-        // axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", fotka)
-        // .then((res)=>console.log(res.data.url))
-        // .catch(()=>console.log("nie poszło"))
-    }
 
 
 

@@ -22,7 +22,7 @@ const OffersBody = (match) => {
                         setMessage("No results")
                         setProducts([])
                         axios
-                        .get("http:localhost:5000/promotions")
+                        .get("http://localhost:5000/promotions")
                         .then(res=>match.passData(res.data))
                         .catch(()=>match.passData(""))
                     }
@@ -31,7 +31,7 @@ const OffersBody = (match) => {
                 .catch(()=>setMessage("Cant load products"))}
         else {
             axios
-            .get("http:localhost:5000/promotions")
+            .get("http://localhost:5000/promotions")
             .then(res=>{
                 match.passData(res.data)
                 promotions=[]

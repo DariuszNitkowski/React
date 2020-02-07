@@ -3,11 +3,13 @@ import {withRouter} from "react-router"
 import {Link} from "react-router-dom"
 import Add from "./HeaderComponents/Add"
 
+var promotions=[]
+
 const Header = (match) => {
     const {logged, shoppingList, userName}=match.userState
     const [searchingFor, setSearchingFor]=useState({search:"", kind:""})
     
-    if (match.passedObject.length>0) const promotions=match.passedObject
+    if (match.passedObject.length>0) promotions=match.passedObject
 
     const handleSearch=(e, type)=>{
         setSearchingFor({search: e.target.value, kind: type})
@@ -34,41 +36,33 @@ const Header = (match) => {
                 <option>skw</option>
             </select></div>
             <div id="searchBtn"><button onClick={sendSearch}>Search</button></div>
+            <div id="add">
+                    <Add promotions={promotions} passData={match.passData}/>    
+                </div>
             {logged?
             <>
             <div id="dropdown">
                 <button>Menu</button>
                 <div id="dropdown-content">
-                <div><Link to="/user">Settings</Link></div>
-                <div><Link to="/sell">My sell</Link></div>
-                <div id="divider">_____________</div>
-                <div><Link to="/"
-                     onClick={()=>match.setUserState({logged: false})}>{userName.substr(0,10)} Logout</Link></div>
+                    <div><Link to="/user">Settings</Link></div>
+                    <div><Link to="/sell">My sell</Link></div>
+                    <div id="divider">_____________</div>
+                    <div><Link to="/"onClick={()=>match.setUserState({logged: false})}>{userName.substr(0,10)} Logout</Link></div>
+                </div>
+            </div>
                 
-                </div>
-                </div>
-                <div id="add">
-                    <Add promotions={promotions}
-                        passData={match.passData}/>    
-                </div>
                 
-                <div id="basket">
+            <div id="basket">
                 <Link to="/basket">
                     <button>Go to cashier! items: {shoppingList.length}</button>
                 </Link>
-                </div>
-                </> 
-                : 
-            <>
+            </div></>: 
+            
             <div id="login"> 
                 <Link to="/login">
                     <button onClick={()=>match.history.push({pathname:"/login"})}>Login</button>
-                </Link></div>
-                <div id="add">jakaś reklama, jakiś tekst</div>
-            </>} 
-
-            
-
+                </Link>
+            </div>} 
         </div>
      );
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {withRouter} from "react-router"
 
-let name, description, vol, price, image, gotFrom=""
+let name, description, vol, price, images, gotFrom=""
 const DisplayProduct = (match) => {
     
     let passedData=match.passedObject

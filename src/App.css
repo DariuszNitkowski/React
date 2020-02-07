@@ -73,19 +73,19 @@ a :visited{
 #dropdown button{
     background-color: yellow;
     width: 120px;
-    transform: translateX(750px);
+    transform: translateX(250px);
 }
 
 
 #login button{
     background-color: yellow;
     width: 120px;
-    transform: translateX(750px);}
+    transform: translateX(250px);}
 
 
 #add{
     background-color: violet;
-    transform: translateX(-80px);
+    transform: translateX(30px);
     width: 500px;
 }
 /* Offers Body */
@@ -226,7 +226,7 @@ Link{
 }
 
 #dropdown:hover #dropdown-content {
-    transform: translateX(750px);
+    transform: translateX(250px);
     display: block;
     overflow: visible; 
     text-decoration: none;
@@ -253,7 +253,7 @@ Link{
     position: fixed;
     z-index: -1;
     width: 100px;
-    transform: translateY(5px) translateX(1100px);
+    transform: translateY(100px) translateX(1100px);
     
     z-index: 2;}
 
