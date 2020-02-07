@@ -11,6 +11,8 @@ const AddProduct = (match) => {
     const [foto, setFoto]=useState({"first":"","second":"","third":""})
     const [message, setMessage]=useState("")
     const {logged, email}=match.userState
+    
+    
     const addProduct=(e)=>{
         e.preventDefault()
         // moze tutaj zastosowac FormData? moze by oczysciło troche miejsca w kodzie
@@ -28,20 +30,30 @@ const AddProduct = (match) => {
             productForm["productPrice"].value=""}
         if (err.length>0) setMessage(err)
         else {
-            let keywords=[]
-            keywords.push(name, productDescr, category)
-            let newProduct={
-                name: name, vol: vol, description: productDescr, category: category, 
-                keywords: keywords, price: price, owner: email, links: links}
-            axios
-            .post("http://localhost:5000/product/add", newProduct)
-            .then((res)=>{
-                setMessage("Product added")
-                setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
-            .catch(()=>setMessage("Cant add product, try again"))
+            let singleFileImg=new FormData()
+            let fotos=[file1, file2, file3].filter(item=>item!="")
+            for (let foto of fotos){
+                singleFileImg.append("upload_preset", "cloudinary_place")
+                singleFileImg.append("file", foto)
+                axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", singleFileImg)
+                .then((res)=>links.append(res.data.url))
+                .catch(()=>setMessage("Couldnt add image"))}
+            if (message===""){
+                let keywords=[]
+                keywords.push(name, productDescr, category)
+                let newProduct={
+                    name: name, vol: vol, description: productDescr, category: category, 
+                    keywords: keywords, price: price, owner: email, links: links}
+                axios
+                .post("http://localhost:5000/product/add", newProduct)
+                .then((res)=>{
+                    setMessage("Product added")
+                    setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
+                .catch(()=>setMessage("Cant add product, try again"))}
         }
-    
     }
+
+
     const imageChange=(e, fileOrder)=>{
         switch (fileOrder){
             case "first":
@@ -67,27 +79,10 @@ const AddProduct = (match) => {
     
     
     
-    const loadImg =event=>{
-        event.preventDefault()
-        let singleFileImg=new FormData()
-        let fotos=[file1, file2, file3].filter(item=>item!="")
-        for (let foto of fotos){
-            singleFileImg.append("upload_preset", "cloudinary_place")
-            singleFileImg.append("file", foto)
-            axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", singleFileImg)
-            .then((res)=>links.append(res.data.url))
-            .catch(()=>setMessage("Couldnt add image"))}
-        }
-
-
-
-
-
-// zamieniłem logged na true na krótko
-        return ( <>
+    return ( <>
             <div id="userMsg">{message}</div>
             <div id="body">
-            {true?
+            {logged?
             <form name="productForm" onSubmit={addProduct}>
                 <div id="addName"><input name="productName" type="text" placeholder="name of product"/></div> 
                 <div id="addVol"><input name="productVol" type="number" placeholder="items?" min={1}/></div>
@@ -95,15 +90,15 @@ const AddProduct = (match) => {
                 <div id="addDesc"><textarea placeholder="please describe your product" name="productDescr"/></div>
                 <div id="addPrice"><input type="text" placeholder="what is a price for signle item" name="productPrice"/></div>
                 <div id="addBtn"><button>Add product</button></div>
-            </form>:
-            <div id="pageMsg">You need to log in</div>}
-            <form name="picForm" onSubmit={loadImg}>
-            Please upload picture showing the product. Maximum size :...
+            
+            
+            Please upload up to 3 pictures showing the product.
             
             <div id="addImage1"><input onChange={(e)=>imageChange(e,"first")} type="file" name="pic1" accept="image/*"/></div>
             <div id="addImage2"><input onChange={(e)=>imageChange(e, "second")} type="file" name="pic2" accept="image/*"/></div>
             <div id="addImage3"><input onChange={(e)=>imageChange(e, "third")} type="file" name="pic3" accept="image/*"/></div>
-            <div id="addBtn"><button>Add product</button></div></form>
+            <div id="addBtn"><button>Add product</button></div></form>:
+            <div id="pageMsg">You need to log in</div>}
             {(foto.first+foto.second+foto.third).length>0?<div id id="imgAdddedAvatar">This foto will apear as avatar in main list of products<img  src={foto.first?foto.first:foto.second?foto.second:foto.third?foto.third:null}/></div>:null}
             {foto.first?<div className="imgAddded">Those will be visible if product will be clicked<img src={foto.first}/></div>:null}
             {foto.second?<div className="imgAddded"><img src={foto.second}/></div>:null}
