@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {withRouter} from "react-router"
 import {Link} from "react-router-dom"
+import Add from "./HeaderComponents/Add"
 
 const Header = (match) => {
     const {logged, shoppingList, userName}=match.userState
     const [searchingFor, setSearchingFor]=useState({search:"", kind:""})
-    const [kind, setKind]=useState("")
     
+    if (match.passedObject.length>0) const promotions=match.passedObject
+
     const handleSearch=(e, type)=>{
         setSearchingFor({search: e.target.value, kind: type})
     }
@@ -45,7 +47,10 @@ const Header = (match) => {
                 
                 </div>
                 </div>
-                <div id="add">jakaś reklama, jakiś tekst</div>
+                <div id="add">
+                    <Add promotions={promotions}
+                        passData={match.passData}/>    
+                </div>
                 
                 <div id="basket">
                 <Link to="/basket">

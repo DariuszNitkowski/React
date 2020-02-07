@@ -25,7 +25,8 @@ app.use("/user", userRoute)
 const productRoute=require("./products.routes")
 app.use("/product", productRoute)
 
-
+const promotionRoute=require("./promotions.routes")
+app.use("/promotions", promotionRoute)
 
 app.listen(port, (err)=>{
     if (err) throw err})

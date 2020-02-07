@@ -21,7 +21,10 @@ const OffersBody = (match) => {
                     if (res.data==0) {
                         setMessage("No results")
                         setProducts([])
-                    
+                        axios
+                        .get("http:localhost:5000/promotions")
+                        .then(res=>match.passData(res.data))
+                        .catch(()=>match.passData(""))
                     }
                     else {
                         setProducts(res.data)}})
@@ -30,7 +33,10 @@ const OffersBody = (match) => {
             axios.get("http://localhost:5000/product")
             .then(res=>{
                 setProducts(res.data)
-                
+                axios
+                .get("http:localhost:5000/promotions")
+                .then(res=>match.passData(res.data))
+                .catch(()=>match.passData(""))
             })
             .catch(()=>setMessage("Cant get products"))}
     },[match.passedObject])

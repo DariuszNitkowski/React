@@ -36,7 +36,7 @@ function App() {
   }
   // do zrobienia: 
   
-  //ogarniecie tej reklamy albo wyjebanie tego
+  //ogarniecie tej reklamy albo usuniecie
   //ostylowanie
   // wyswietlanie polecanych produktow
   
@@ -56,7 +56,7 @@ function App() {
     <>
 
       <Router >
-        <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
+        <Route path="/" render={props=>(<Header {...props} userState={userState} setUserState={setUserState} passData={passData} passedObject={passedObject}/>)}/>
         <Route path="/" exact render={props=>(<OffersBody userState={userState} setUserState={setUserState} passData={passData} passedObject={passedObject}/>)}/>
         <Route path="/login" render={props=>(<LoginBody userState={userState} setUserState={setUserState}/>)}/>
         <Route path="/create" render={props=>(<CreateAccountBody userState={userState}/>)}/>
