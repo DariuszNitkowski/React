@@ -6,7 +6,7 @@ import axios from "axios"
 
 
 var currentVol=[]
-
+var promotions=[]
 const OffersBody = (match) => {
     const [message, setMessage]=useState("")
     const [products, setProducts]=useState([])
@@ -30,16 +30,17 @@ const OffersBody = (match) => {
                         setProducts(res.data)}})
                 .catch(()=>setMessage("Cant load products"))}
         else {
-            axios.get("http://localhost:5000/product")
+            axios
+            .get("http:localhost:5000/promotions")
             .then(res=>{
-                setProducts(res.data)
-                axios
-                .get("http:localhost:5000/promotions")
-                .then(res=>match.passData(res.data))
-                .catch(()=>match.passData(""))
-            })
-            .catch(()=>setMessage("Cant get products"))}
-    },[match.passedObject])
+                match.passData(res.data)
+                promotions=[]
+                for (var item of res.data) promotions.append(item.productId)
+                axios.get("http://localhost:5000/product/many", promotions) // to trzeba zmienic zeby brało kilka id
+                .then(res=>setProducts(res.data))
+                .catch(()=>setMessage("Cant get products"))})
+            .catch(()=>match.passData(""))}},
+            [match.passedObject])
 
     const showSingleProduct=(id)=>{
         let productChosen=products.find((item)=>item._id==id)

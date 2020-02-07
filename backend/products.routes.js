@@ -11,6 +11,13 @@ ProductRouter.route("/search/:search").get((req,res)=>{
 })
     
 
+ProductRouter.route("/many").get((req,res)=>{
+    Product.find()
+    .where("_id").in(req.body).exec((err, products)=>{
+        res.send(products)
+    })
+
+})
 
 
 ProductRouter.route("/add").post((req,res)=>{

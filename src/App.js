@@ -36,9 +36,7 @@ function App() {
   }
   // do zrobienia: 
   
-  //ogarniecie tej reklamy albo usuniecie
   //ostylowanie
-  // wyswietlanie polecanych produktow
   
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
