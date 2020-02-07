@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "cloudinary": "^1.19.0",
+    "cloudinary-core": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",

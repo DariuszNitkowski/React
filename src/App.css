@@ -283,4 +283,19 @@ addCategory
 addDesc
 addPrice
 addImage
-addBtn */
+addBtn 
+addImage1
+addImage2
+addImage3
+
+
+*/
+.imgAddded img{
+    max-width: 700px;
+    max-height: 600px;
+}
+
+#imgAdddedAvatar img{
+    max-width: 250px;
+    max-height: 150px;
+}

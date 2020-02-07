@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {withRouter} from "react-router"
-const transform = require('transform-images')
 
+var file1=""
+var file2=""
+var file3=""
 
 const AddProduct = (match) => {
     
-    const [foto, setFoto]=useState("")
+    const [foto, setFoto]=useState({"first":"","second":"","third":""})
     const [message, setMessage]=useState("")
     const {logged, email, own}=match.userState
     const addProduct=(e)=>{
@@ -38,44 +40,50 @@ const AddProduct = (match) => {
             .catch(()=>setMessage("Cant add product, try again"))
         }
     
+    }
+    const imageChange=(e, fileOrder)=>{
+        switch (fileOrder){
+            case "first":
+                file1=e.target.files[0]
+                setFoto(prevState=>({
+                    ...prevState,
+                    [fileOrder]: URL.createObjectURL(file1)}))
+                break
+            case "second":
+                file2=e.target.files[0]
+                setFoto(prevState=>({
+                    ...prevState,
+                    [fileOrder]: URL.createObjectURL(file2)}))
+                break
+            case "third":
+                file3=e.target.files[0]
+                setFoto(prevState=>({
+                    ...prevState,
+                    [fileOrder]: URL.createObjectURL(file3)}))
+                break
         }
-    // to jest dopisane
-    const plik=e=>{
-        // console.log("przed zmianą sizu",event.target.files[0])
-        // console.log(URL.createObjectURL(event.target.files[0]) )
-        
-        const source = URL.createObjectURL(e.target.files[0])
-        console.log(source)
-        // const options = {
-        // width: 100,
-        // height: 100,
-        // output: 'image',
-        // outputFilename: './output.png',
-        // quality: 100
-        // }
-        // getbase
-        transform(source, {width: 100, height: 100, outputFilename: 'output.png'})
-        .then(image => console.log(image))
-        .catch(error => console.error(error))}
+    }
     
-    // setFoto(URL.createObjectURL(event.target.files[0]))
-    // let blob = await fetch(url).then(r => r.blob());
-    // ustawiam url w src img a url jest tworzony z obrazow ktore sa w pamieci.
+    
     
     const loadImg =event=>{
         event.preventDefault()
         let fotka=new FormData()
-        fotka.append("upload_preset", "cloudinary_place")
-        fotka.append("file", foto)
-        axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", fotka)
-        .then((res)=>console.log(res.data.url))
-        .catch(()=>console.log("nie poszło"))
-}
-
-    const pobierzZdjecie=()=>{
-        setFoto("http://res.cloudinary.com/dm2jhvidl/image/upload/v1581022229/nodnnljaernc5jem29gp.jpg")
-        
+        // let blob= fetch(foto).then(r=>r.blob())
+        let fotos=[file1, file2, file3]
+        for (let foto of fotos){
+            console.log(foto)
+        }
+        // fotka.append("upload_preset", "cloudinary_place")
+        // fotka.append("file", file1)
+        // axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", fotka)
+        // .then((res)=>console.log(res.data.url))
+        // .catch(()=>console.log("nie poszło"))
     }
+
+
+
+
 
 // zamieniłem logged na true na krótko
         return ( <>
@@ -91,13 +99,17 @@ const AddProduct = (match) => {
                 <div id="addBtn"><button>Add product</button></div>
             </form>:
             <div id="pageMsg">You need to log in</div>}
-            <form onSubmit={loadImg}>
+            <form name="picForm" onSubmit={loadImg}>
             Please upload picture showing the product. Maximum size :...
-            <div id="addImage"><input onChange={plik} type="file" name="pic" accept="image/*"/></div>
-            <div id="addBtn"><button>Add product</button></div></form>
             
-            <div id="addBtn"><button onClick={pobierzZdjecie}>Pokaż zdjęcie</button></div>
-            <img src={foto}/>
+            <div id="addImage1"><input onChange={(e)=>imageChange(e,"first")} type="file" name="pic1" accept="image/*"/></div>
+            <div id="addImage2"><input onChange={(e)=>imageChange(e, "second")} type="file" name="pic2" accept="image/*"/></div>
+            <div id="addImage3"><input onChange={(e)=>imageChange(e, "third")} type="file" name="pic3" accept="image/*"/></div>
+            <div id="addBtn"><button>Add product</button></div></form>
+            {(foto.first+foto.second+foto.third).length>0?<div id id="imgAdddedAvatar">This foto will apear as avatar in main list of products<img  src={foto.first?foto.first:foto.second?foto.second:foto.third?foto.third:null}/></div>:null}
+            {foto.first?<div className="imgAddded">Those will be visible if product will be clicked<img src={foto.first}/></div>:null}
+            {foto.second?<div className="imgAddded"><img src={foto.second}/></div>:null}
+            {foto.third?<div className="imgAddded"><img src={foto.third}/></div>:null}
          </div></>   
      );
 }
