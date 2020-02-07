@@ -90,16 +90,12 @@ a :visited{
 }
 /* Offers Body */
 
-.productImageMedium{
-    width:100px;height:100px;
-}
+
 #products {
     white-space: nowrap;
     transform: translateY(50px) translateX(-100px);
 }
 
-
-/* .row{position: fixed;} */
 
 .tableName {
     position: relative;
@@ -144,6 +140,9 @@ a :visited{
     display: inline-block;
     width:152px;
     height:150px;
+}
+.tableImg img{
+    width:100px;height:100px;
 }
 
 .tableImg :hover{
@@ -268,7 +267,7 @@ Link{
 }
 
 
-/* singleProduct, spName, spImage, spDescription, spVol, spPrice, spBuyBtn, spBack */
+/* singleProduct, spName, #spImg1,#spImg2,#spImg3 spDescription, spVol, spPrice, spBuyBtn, spBack */
 /* 
 sellTitle
 sellName

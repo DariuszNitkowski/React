@@ -20,7 +20,9 @@ const OffersBody = (match) => {
                 .then((res)=>{
                     if (res.data==0) {
                         setMessage("No results")
-                        setProducts([])}
+                        setProducts([])
+                    
+                    }
                     else {
                         setProducts(res.data)}})
                 .catch(()=>setMessage("Cant load products"))}
@@ -28,6 +30,7 @@ const OffersBody = (match) => {
             axios.get("http://localhost:5000/product")
             .then(res=>{
                 setProducts(res.data)
+                
             })
             .catch(()=>setMessage("Cant get products"))}
     },[match.passedObject])
@@ -84,7 +87,7 @@ const OffersBody = (match) => {
             
             {products.map((item=>item.vol!=0?<div className="row" key={item._id}><Link to="/singleproduct" onClick={()=>showSingleProduct(item._id)}>
             <div className="tableName">{item.name}</div><div className="tableDescr">
-            {item.description}</div><div className="tableImg"><img src={item.image} className="productImageMedium"/></div>
+            {item.description}</div><div className="tableImg">{item.links.length>0?<img src={item.links[0]}/>:"No photo"}</div>
             <div className="tablePrice">{item.price} PLN</div></Link>
             {logged?<><div className="tableVol"><input type="number" name={item._id} onChange={handleBidChange} placeholder="?" 
             min={1} max={item.vol} maxLength={6}/></div><div className="tableBuy">

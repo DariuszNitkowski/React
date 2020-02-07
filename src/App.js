@@ -37,15 +37,18 @@ function App() {
   // do zrobienia: 
   
   //ogarniecie tej reklamy albo wyjebanie tego
-  //wsadzanie zdjec a potem refaktoryzacja kodu zeby były widoczne na stronie i wynikach i wogóle
   //ostylowanie
-  // tak samo w offersbody, wyswietlanie polecanych produktow
+  // wyswietlanie polecanych produktow
   
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
+  // sprawdzic czy usuwa file1 po przejsciu do innego komponentu czy trzyma w pamieci. jesli trzyma
+  //to jakis reset potrzebny. dodatkowo reset URL ów URL.revokeObjectURL()
+  // czy url na bolb to naprawde tyle kodu? jesli tak to zostaje przy zmiennych dla zdjec
   
   // do poprawienia:
   //moze jakas refaktoryzacja w product edit bo wyglada ciezko
+  // moze dodac jakies ostrzezenie przy usuwaniu produktu. jakis alert!
 
   
   console.log("w głównym")

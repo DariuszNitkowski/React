@@ -8,7 +8,7 @@ const ProductSchema=new Schema({
     description:{type: String, required:true, maxlength:50},
     category: {type: String, required:true},
     keywords: {type:Array},
-    // image:{type: },
+    links: {type: Array, maxlength:3},
     price: {type: Number},
     owner: {type:String, required: true}
 }, {collection: "products"})

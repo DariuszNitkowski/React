@@ -8,10 +8,14 @@ const Basket = (props) => {
     const {logged, shoppingList, email}=props.userState 
 
 
-    const showSingleProduct=(product)=>{
-        props.passData(product, "basket")
-            // {data: product, from: "basket"})
-        props.history.push({pathname:"/singleproduct"})
+    const showSingleProduct=(id)=>{
+        axios
+        .get("htttp://localhost:5000/product/findbyId", id)
+        .then((res=>{
+            props.passData(res.data, "basket")
+            props.history.push({pathname:"/singleproduct"})
+        }))
+        .catch(()=>setMessage("Cant load the product"))
     }
 
     const handleDelte=(idDel, volDel, index)=>{
@@ -50,7 +54,7 @@ const Basket = (props) => {
                 <tbody>{shoppingList.map((item, index)=><tr key={index}><td className="basketName">{item.name}</td><td className="basketVol">{item.vol}</td>
                 <td className="basketPrice">{item.price} PLN</td><td className="basketBtn">
                 <button onClick={()=>handleDelte(item._id, item.vol, index)}>Delete</button></td>
-                <td className="basketProdBtn"><button onClick={()=>showSingleProduct(item)}>Show</button></td></tr>)}</tbody>
+                <td className="basketProdBtn"><button onClick={()=>showSingleProduct(item._id)}>Show</button></td></tr>)}</tbody>
                 </table><div><button id="payBtn" onClick={handlePay}>Pay for items</button></div></>: 
                 <div id="pageMsg">No items in your basket</div>}</>:<div id="pageMsg">You need to log in</div>} 
     </div></>

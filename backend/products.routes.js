@@ -15,8 +15,8 @@ ProductRouter.route("/search/:search").get((req,res)=>{
 
 ProductRouter.route("/add").post((req,res)=>{
     
-    let {name, vol, description, category, keywords, price, owner}=req.body
-    const newProduct=new Product({name, vol, description, category, keywords, price, owner})
+    let {name, vol, description, category, keywords,links, price, owner}=req.body
+    const newProduct=new Product({name, vol, description, category, keywords, links, price, owner})
     newProduct.save()
     .then((product)=>res.send(product))
     .catch((err)=>res.json(err))
@@ -25,6 +25,12 @@ ProductRouter.route("/add").post((req,res)=>{
 ProductRouter.route("/").get((req,res)=>{
     Product.find()
     .then(product=>res.send(product))
+    .catch(err=>res.json(err))
+})
+
+ProductRouter.route("/findbyId").get((req,res)=>{
+    Product.findById(req.body.id)
+    .then(product=>res.json(product))
     .catch(err=>res.json(err))
 })
 

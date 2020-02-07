@@ -10,7 +10,7 @@ const AddProduct = (match) => {
     
     const [foto, setFoto]=useState({"first":"","second":"","third":""})
     const [message, setMessage]=useState("")
-    const {logged, email, own}=match.userState
+    const {logged, email}=match.userState
     const addProduct=(e)=>{
         e.preventDefault()
         // moze tutaj zastosowac FormData? moze by oczysciło troche miejsca w kodzie
@@ -31,7 +31,8 @@ const AddProduct = (match) => {
             let keywords=[]
             keywords.push(name, productDescr, category)
             let newProduct={
-                name: name, vol: vol, description: productDescr, category: category, keywords: keywords, price: price, owner: email}
+                name: name, vol: vol, description: productDescr, category: category, 
+                keywords: keywords, price: price, owner: email, links: links}
             axios
             .post("http://localhost:5000/product/add", newProduct)
             .then((res)=>{
@@ -74,6 +75,8 @@ const AddProduct = (match) => {
         for (let foto of fotos){
             console.log(foto)
         }
+
+        //przesniecie zdjecia na index 0 jesli index 0 jest pusty. z dwójki a jesli tez pusta to z 3ki.
         // fotka.append("upload_preset", "cloudinary_place")
         // fotka.append("file", file1)
         // axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", fotka)
