@@ -5,7 +5,7 @@ import {withRouter} from "react-router"
 var file1=""
 var file2=""
 var file3=""
-var links=[]
+
 const AddProduct = (match) => {
     
     const [foto, setFoto]=useState({"first":"","second":"","third":""})
@@ -15,7 +15,6 @@ const AddProduct = (match) => {
     
     const addProduct=(e)=>{
         e.preventDefault()
-        // moze tutaj zastosowac FormData? moze by oczysciło troche miejsca w kodzie
         let err=""
         let productForm=document.forms["productForm"]
         let name=productForm["productName"].value
@@ -24,34 +23,84 @@ const AddProduct = (match) => {
         let category=productForm["category"].value
         let price=productForm["productPrice"].value
         if (name.length===0 || vol.length===0 || productDescr.length===0 || 
-            price.length===0 || category==="What is your category?") err+="fill all fields"
+            price.length===0 || category==="What category?") err+="fill all fields"
         if (isNaN(price)){
             err+=" price must be number"
             productForm["productPrice"].value=""}
-        if (err.length>0) setMessage(err)
+        if (err.length>0) {
+            setMessage(err)
+            setTimeout(()=>setMessage(""), 5000)}
         else {
-            let singleFileImg=new FormData()
-            let fotos=[file1, file2, file3].filter(item=>item!="")
-            for (let foto of fotos){
-                singleFileImg.append("upload_preset", "cloudinary_place")
-                singleFileImg.append("file", foto)
-                axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload", singleFileImg)
-                .then((res)=>links.append(res.data.url))
-                .catch(()=>setMessage("Couldnt add image"))}
-            if (message===""){
-                let keywords=[]
-                keywords.push(name, productDescr, category)
-                let newProduct={
-                    name: name, vol: vol, description: productDescr, category: category, 
-                    keywords: keywords, price: price, owner: email, links: links}
-                axios
-                .post("http://localhost:5000/product/add", newProduct)
-                .then((res)=>{
-                    setMessage("Product added")
-                    setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
-                .catch(()=>setMessage("Cant add product, try again"))}
+            uploadImages(name, vol, productDescr, category, price)
+            
         }
     }
+
+    // const uploadData=(name, vol, productDescr, category, price)=>{
+        // if (message===""){
+        //     let keywords=[]
+        //     console.log("linki w data",links)
+        //     keywords.push(name, productDescr, category)
+        //     let newProduct={
+        //         name: name, vol: vol, description: productDescr, category: category, 
+        //         keywords: keywords, price: price, owner: email, links: links}
+        //     axios
+        //     .post("http://localhost:5000/product/add", newProduct)
+        //     .then((res)=>{
+        //         setMessage("Product added")
+        //         setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
+        //     .catch(()=>setMessage("Cant add product, try again"))}
+        //     console.log("zakonczony upload data")}
+   
+
+
+    // const xxxs=()=>{
+    //     console.log("rozpoczety upload images")
+    //     let links=[]
+    //     let singleFileImg=new FormData()
+    //     let fotos=[file1, file2, file3].filter(item=>item!="")
+    //     for (let foto of fotos){
+    //         singleFileImg.append("upload_preset", "cloudinary_place")
+    //         singleFileImg.append("file", foto)
+    //         axios.post(`https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload/`, singleFileImg)
+    //         .then((res)=>{
+    //             console.log("odpowiedz z axiosa", res.data.url)
+    //             links.append(res.data.url)
+    //             console.log("linki", links)})
+    //         .catch(()=>setMessage("Couldnt add image"))}
+    //     console.log("zakonczony upload images")
+    //     return links
+    // }
+
+    const uploadImages = (name, vol, productDescr, category, price) => {
+        setMessage("Uploding product")
+        let fotos=[file1, file2, file3].filter(item=>item!=="")
+        var adresses=[]
+        const uploaders = fotos.map(file => {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", "cloudinary_place"); 
+          formData.append("folder",email); 
+          return axios.post("https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload/", formData)
+          .then(response =>adresses.push(response.data.url));
+          })
+        axios.all(uploaders)
+        .then(() =>{
+            let keywords=[]
+            keywords.push(name, productDescr, category)
+            let newProduct={
+                name: name, vol: vol, description: productDescr, category: category, 
+                keywords: keywords, price: price, owner: email, links: adresses}
+            console.log(newProduct)
+            axios
+            .post("http://localhost:5000/product/add", newProduct)
+            .then((res)=>{
+                setMessage("Product added")
+                setTimeout(()=>match.history.push({pathname:"/sell"}),1000)})
+            .catch(()=>{
+                setMessage("Cant add product, try again")
+                setTimeout(()=>setMessage(""), 5000)})})
+        .catch(()=>setMessage("Cant add images"))}
 
 
     const imageChange=(e, fileOrder)=>{
@@ -74,6 +123,8 @@ const AddProduct = (match) => {
                     ...prevState,
                     [fileOrder]: URL.createObjectURL(file3)}))
                 break
+            default:
+                break
         }
     }
     
@@ -86,10 +137,11 @@ const AddProduct = (match) => {
             <form name="productForm" onSubmit={addProduct}>
                 <div id="addName"><input name="productName" type="text" placeholder="name of product"/></div> 
                 <div id="addVol"><input name="productVol" type="number" placeholder="items?" min={1}/></div>
-                <div id="addCategory"><select name="category"><option>Which category?</option><option>ogrod</option></select></div>
+                <div id="addCategory"><select name="category"><option>What category?</option><option>Books</option>
+                <option>Cars</option><option>Clothing</option><option>Health</option><option>Home</option>
+                <option>Sport</option><option>Travel</option></select></div>
                 <div id="addDesc"><textarea placeholder="please describe your product" name="productDescr"/></div>
                 <div id="addPrice"><input type="text" placeholder="what is a price for signle item" name="productPrice"/></div>
-                <div id="addBtn"><button>Add product</button></div>
             
             
             Please upload up to 3 pictures showing the product.
@@ -99,10 +151,10 @@ const AddProduct = (match) => {
             <div id="addImage3"><input onChange={(e)=>imageChange(e, "third")} type="file" name="pic3" accept="image/*"/></div>
             <div id="addBtn"><button>Add product</button></div></form>:
             <div id="pageMsg">You need to log in</div>}
-            {(foto.first+foto.second+foto.third).length>0?<div id id="imgAdddedAvatar">This foto will apear as avatar in main list of products<img  src={foto.first?foto.first:foto.second?foto.second:foto.third?foto.third:null}/></div>:null}
-            {foto.first?<div className="imgAddded">Those will be visible if product will be clicked<img src={foto.first}/></div>:null}
-            {foto.second?<div className="imgAddded"><img src={foto.second}/></div>:null}
-            {foto.third?<div className="imgAddded"><img src={foto.third}/></div>:null}
+            {(foto.first+foto.second+foto.third).length>0?<div id="imgAdddedAvatar">This foto will apear as avatar in main list of products<img  alt={""}src={foto.first?foto.first:foto.second?foto.second:foto.third?foto.third:null}/></div>:null}
+            {foto.first?<div className="imgAddded">Those will be visible if product will be clicked<img src={foto.first} alt={""}/></div>:null}
+            {foto.second?<div className="imgAddded"><img src={foto.second} alt={""}/></div>:null}
+            {foto.third?<div className="imgAddded"><img src={foto.third} alt={""}/></div>:null}
          </div></>   
      );
 }

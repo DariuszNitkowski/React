@@ -12,8 +12,8 @@
     
     background-color: burlywood;
     display: flex;
-    margin-top: -30px;
-    height: 30px;
+    margin-top: -45px;
+    height: 45px;
     width: 1300px;
     position: fixed;
     /* overflow: hidden; */
@@ -34,50 +34,63 @@ a :visited{
 
 
 #body{
-    margin-top: 30px;
+    margin-top: 45px;
     background-color: crimson;
-    min-height: 643px;
+    min-height: 638px;
     text-align: center;
     z-index: -1;
     
 }
 
-.footer{
+#footer{
     background-color: cyan;
     text-align: center;
     min-height: 25px;
     
+}
+#footer button{
+    transform: translateX(500px);
 }
 
 
 /* header */
 #search input{
     background-color:cornflowerblue;
-    transform: translateX(10px);}
+    transform: translateX(10px);
+    font-size: large;}
 
 #searchBtn{
-    transform: translateX(20px)
+    transform: translateX(20px);
+    padding: 10px;}
+
+#searchBtn button{
+    font-size: large;
 }
 
 #categories select{
     background-color: darkred;
-    transform: translateX(20px)}
+    transform: translateX(20px);
+    font-size: large;}
 
 
 
 #basket button{
     background-color: yellow;
-    transform: translateX(-50px);
-    width: 170px;
+    transform: translateX(-80px);
+    width: 200px;
+    font-size: large;
 }
 #dropdown button{
     background-color: yellow;
     width: 120px;
-    transform: translateX(250px);
+    font-size: large;
 }
 
 
+
+
 #login button{
+    font-size: large;
     background-color: yellow;
     width: 120px;
     transform: translateX(250px);}
@@ -86,8 +99,17 @@ a :visited{
 #add{
     background-color: violet;
     transform: translateX(30px);
-    width: 500px;
+    font-size: 30px;
+    width: 450px;
+    height: 30px;
 }
+
+#add Link{
+    background-color: black;
+    font-size: 40px;
+    font: bold;
+}
+
 /* Offers Body */
 
 
@@ -132,9 +154,9 @@ a :visited{
     align-items: center;
     
 }
-.tableVol input{
+/* .tableVol input{
     
-}
+} */
 
 .tableImg{
     display: inline-block;
@@ -208,8 +230,10 @@ a :visited{
 
 }
 #dropdown {
+    transform: translateX(250px);
     position: relative;
     display: inline-block;
+    font-size: large;
   }
 Link{
     text-decoration-style: none;
@@ -226,11 +250,12 @@ Link{
 }
 
 #dropdown:hover #dropdown-content {
-    transform: translateX(250px);
+    
     display: block;
     overflow: visible; 
     text-decoration: none;
     line-height: 2em;
+    font-size: large;
 }
 
 #divider{

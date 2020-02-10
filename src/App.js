@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useReducer} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom"
+import React, {useState} from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
 import OffersBody from "./Components/HeaderComponents/OffersBody"
@@ -8,7 +8,6 @@ import CreateAccountBody from './Components/HeaderComponents/CreateAccountBody'
 import Basket from "./Components/HeaderComponents/Basket"
 import AddProduct from "./Components/HeaderComponents/AddProduct"
 import Payment from "./Components/HeaderComponents/Payment"
-import User from "./Components/HeaderComponents/User"
 import Sell from "./Components/HeaderComponents/Sell"
 import ProductEdit from "./Components/HeaderComponents/ProductEdit"
 import DisplayProduct from "./Components/HeaderComponents/DisplayProduct"
@@ -37,7 +36,7 @@ function App() {
   // do zrobienia: 
   
   //ostylowanie
-  
+  //35 znaków w add max!  
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
   // sprawdzic czy usuwa file1 po przejsciu do innego komponentu czy trzyma w pamieci. jesli trzyma
@@ -47,6 +46,7 @@ function App() {
   // do poprawienia:
   //moze jakas refaktoryzacja w product edit bo wyglada ciezko
   // moze dodac jakies ostrzezenie przy usuwaniu produktu. jakis alert!
+
 
   
   console.log("w głównym")
@@ -62,11 +62,13 @@ function App() {
         <Route path="/sell" render={props=>(<Sell {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
         <Route path="/basket" render={props=>(<Basket {...props} userState={userState} setUserState={setUserState} passData={passData}/>)}/>
         <Route path="/payment" render={props=>(<Payment userState={userState}/>)}/>
-        <Route path="/user" render={props=>(<User userState={userState}/>)}/>
         <Route path="/editproduct" render={props=>(<ProductEdit userState={userState} passedObject={passedObject}/>)}/>
         <Route path="/singleproduct" render={props=>(<DisplayProduct userState={userState} passedObject={passedObject}/>)}/>
         <Route path="/" component={Footer}/>
-        
+
+
+
+
       </Router>
       
     </>

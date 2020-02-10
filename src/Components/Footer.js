@@ -6,8 +6,8 @@ const Footer = React.memo(() => {
     
     console.log("w footer")
     return ( 
-        <div className="footer">
-            strona stworzona przez darka
+        <div id="footer">
+            Site made by dn
             <Link to="/"><button>go to main site</button></Link>
         </div>
      );

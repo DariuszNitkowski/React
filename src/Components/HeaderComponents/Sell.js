@@ -22,7 +22,7 @@ const Sell = (props) => {
         axios
         .delete(`http://localhost:5000/product/delete/${id}`)
         .then(()=>{
-            let newList=myProducts.filter(product=>product._id!=id)
+            let newList=myProducts.filter(product=>product._id!==id)
             setMyProducts(newList)
         })
         .catch(err=>console.log("jakis błąd"))

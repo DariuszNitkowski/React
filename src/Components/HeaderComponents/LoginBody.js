@@ -1,5 +1,5 @@
-import React, { useState, useEffect, forceUpdate} from 'react';
-import {BrowserRouter as Router, Link, Route} from "react-router-dom"
+import React, { useState} from 'react';
+import { Link} from "react-router-dom"
 import {withRouter} from "react-router"
 import axios from "axios"
 const validator=require("email-validator")
@@ -53,8 +53,8 @@ const LoginBody = (match) => {
     
     console.log("w login body")
     return ( <>
-        <div id="userMsg">{logMessage}</div>
         <div id="body">
+        <div id="userMsg">{logMessage}</div>
             {logged?<div id="pageMsg">You are logged already</div>:
             <>
             <form name="logForm" onSubmit={handleLogin}>

@@ -19,7 +19,7 @@ const Basket = (props) => {
     }
 
     const handleDelte=(idDel, volDel, index)=>{
-        let volToDelete=(shoppingList.find(item=>item._id==idDel)).vol
+        let volToDelete=(shoppingList.find(item=>item._id===idDel)).vol
         let newProductData={id: idDel, vol: volToDelete}
         axios
         .post("http://localhost:5000/product/changevol", newProductData)
@@ -40,7 +40,6 @@ const Basket = (props) => {
         }
 
 
-    const handlePay=()=>{props.history.push({pathname: "/payment"})}
     
         
     console.log("w basket")
@@ -55,7 +54,7 @@ const Basket = (props) => {
                 <td className="basketPrice">{item.price} PLN</td><td className="basketBtn">
                 <button onClick={()=>handleDelte(item._id, item.vol, index)}>Delete</button></td>
                 <td className="basketProdBtn"><button onClick={()=>showSingleProduct(item._id)}>Show</button></td></tr>)}</tbody>
-                </table><div><button id="payBtn" onClick={handlePay}>Pay for items</button></div></>: 
+                </table></>: 
                 <div id="pageMsg">No items in your basket</div>}</>:<div id="pageMsg">You need to log in</div>} 
     </div></>
      );

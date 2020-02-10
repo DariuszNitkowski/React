@@ -3,12 +3,17 @@ let Product=require("./products.model")
 
 ProductRouter.route("/search/:search").get((req,res)=>{
     let query=req.params.search
-    let field=query.slice(0,query.indexOf(":"))
+    let category=query.slice(0,query.indexOf(":"))
     let value=query.slice(query.indexOf(":")+1)
-    Product.find({[field]: {$regex: value, $options: "i"}}, (err, doc)=>{
+    if (category===""){
+        Product.find({keywords: {$regex: value, $options: "i"}}, (err, doc)=>{
         if (err) console.log("something wrong")
-        else res.send(doc)})
-})
+        else res.send(doc)})}
+    else{
+        Product.find({category: category, keywords: {$regex: value, $options: "i"}}, (err, doc)=>{
+            if (err) console.log("something wrong")
+            else res.send(doc)})} 
+    })
     
 
 ProductRouter.route("/many").get((req,res)=>{
@@ -51,7 +56,7 @@ ProductRouter.route("/edit").post((req, res)=>{
     let {id, name, vol, description, category, keywords, price}=req.body
     Product.findByIdAndUpdate(id, {name: name, vol:vol, description: description, category: category, keywords: keywords,
         price:price}, (err, doc)=>{
-            if (err) console.log("coś nie halo w updejcie produktu")
+            if (err) console.log("something wrong")
             else res.json(doc)})})
 
 ProductRouter.route("/changevol").post((req,res)=>{

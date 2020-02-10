@@ -7,33 +7,48 @@ var promotions=[]
 
 const Header = (match) => {
     const {logged, shoppingList, userName}=match.userState
-    const [searchingFor, setSearchingFor]=useState({search:"", kind:""})
+    const [searchingFor, setSearchingFor]=useState("")
+    const [searchingCategories, setSearchingCategories]=useState("All categories")
     
-    if (match.passedObject.length>0) promotions=match.passedObject
+    if (match.passedObject && match.passedObject.promotions) promotions=match.passedObject.promotions
 
-    const handleSearch=(e, type)=>{
-        setSearchingFor({search: e.target.value, kind: type})
+    const handleSearch=(e)=>{
+        setSearchingFor(e.target.value)
     }
+
+    const handleCategories=(e)=>{
+        setSearchingCategories(e.target.value)
+    }
+    
     const sendSearch=()=>{
-        match.passData(searchingFor)
+        let category
+        if (searchingCategories!=="All categories") category=""
+        else category=searchingCategories
+        match.passData({search: searchingFor, kind: category})
         match.history.push({pathname:"/"})
-        setSearchingFor({search:"", kind:""})
+        setSearchingFor("")
+        setSearchingCategories("")
     }
+
+
     
     console.log("w header")
     return ( 
         <div className="header">
             <div id="search">
-            <input onChange={(event)=>handleSearch(event, "keywords")}type="text" placeholder="search for products" value={searchingFor.search}/>
+            <input onChange={handleSearch} type="text" placeholder="search for products" value={searchingFor}/>
             </div>
             <div id="categories">
-            <select onChange={(event)=>handleSearch(event, "category")} value={searchingFor.search}>
-            <option>choose category</option>
-                <option>ogr</option>
-                <option>gór</option>
-                <option>grz</option>
-                <option>sra</option>
-                <option>skw</option>
+            <select onChange={handleCategories} value={searchingCategories}>
+            <option>All categories</option>
+                <option>Books</option>
+                <option>Cars</option>
+                <option>Clothing</option>
+                <option>Health</option>
+                <option>Home</option>
+                <option>Sport</option>
+                <option>Travel</option>
+
             </select></div>
             <div id="searchBtn"><button onClick={sendSearch}>Search</button></div>
             <div id="add">
@@ -44,7 +59,6 @@ const Header = (match) => {
             <div id="dropdown">
                 <button>Menu</button>
                 <div id="dropdown-content">
-                    <div><Link to="/user">Settings</Link></div>
                     <div><Link to="/sell">My sell</Link></div>
                     <div id="divider">_____________</div>
                     <div><Link to="/"onClick={()=>match.setUserState({logged: false})}>{userName.substr(0,10)} Logout</Link></div>
