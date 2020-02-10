@@ -16,9 +16,9 @@ ProductRouter.route("/search/:search").get((req,res)=>{
     })
     
 
-ProductRouter.route("/many").get((req,res)=>{
+ProductRouter.route("/many/:many").get((req,res)=>{
     Product.find()
-    .where("_id").in(req.body).exec((err, products)=>{
+    .where("_id").in(req.params.many).exec((err, products)=>{
         res.send(products)
     })
 
@@ -40,8 +40,8 @@ ProductRouter.route("/").get((req,res)=>{
     .catch(err=>res.json(err))
 })
 
-ProductRouter.route("/findbyId").get((req,res)=>{
-    Product.findById(req.body.id)
+ProductRouter.route("/findbyId/:id").get((req,res)=>{
+    Product.findById(req.params.id)
     .then(product=>res.json(product))
     .catch(err=>res.json(err))
 })

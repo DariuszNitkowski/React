@@ -6,27 +6,25 @@ import axios from 'axios';
 const Add = (match) => {
     
     const [current, setCurrent]=useState({productId:"", text:"This is spot for your add"})
-    console.log(match.promotions)
+    var promotionsCheck=match.promotions.length>0
     useEffect(()=>{
-        if (match.promotions.length>0){
-        setInterval(()=>{
-            let randomIndex=Math.round(Math.random()*match.promotions.length)
+        if (promotionsCheck){
+            setInterval(()=>{
+            let randomIndex=Math.floor(Math.random()*match.promotions.length)
             setCurrent(match.promotions[randomIndex])
-    
-        },1000)}
+        },10000)}
 
-    },[])
+    },[promotionsCheck])
 
     const displayProduct=(current)=>{
-        axios.get("http://localhost:5000/product/findbyId", current.productId)   
+        axios.get(`http://localhost:5000/product/findbyId/${current.productId}`)   
         .then(res=>{
-            match.passData(res.data)
+            match.passData({from: "", data: res.data, to: "singleproduct"})
             match.history.push({pathname: "/singleproduct"})})
     }
 
-    console.log("w add, reklamie znaczy")
     return ( <>
-        {match.promotions.length!==0?
+        {current.productId!==""?
         <Link to="/singleproduct" onClick={()=>displayProduct(current)}>
             {current.text}
         </Link>:

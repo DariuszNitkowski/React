@@ -1,20 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {withRouter} from "react-router"
 import axios from 'axios';
 
+
 const ProductEdit = (match) => {
     let passedData=match.passedObject
-    console.log(passedData.length>0, passedData)
     const logged=match.userState.logged    
     const [message, setMessage]=useState("")
-    const [editedProduct, setEditedProduct]=useState({
-        id: passedData.length>0?passedData[0]._id:null,
-        name: passedData.length>0?match.passedObject[0].name:null,
-        vol: passedData.length>0?passedData[0].vol:null,
-        description: passedData.length>0?passedData[0].description:null,
-        category: passedData.length>0?passedData[0].category: null,
-        price: passedData.length>0?passedData[0].price:null
-    })
+    const [editedProduct, setEditedProduct]=useState({id:"", name:"", vol:"", description:"", category:"", price:""})
+    
+    useEffect(()=>{
+        if (passedData.to!=="edit")setEditedProduct({id:"", name:"", vol:"", description:"", category:"", price:""})
+        else{    
+            setEditedProduct({
+                id: passedData.data._id,
+                name: passedData.data.name,
+                vol: passedData.data.vol,
+                description: passedData.data.description,
+                category: passedData.data.category,
+                price: passedData.data.price})}},[])
+    
+        
     const {id, name, vol, description, category, price}=editedProduct
     
     const handleChanges=(e)=>{
@@ -48,7 +54,6 @@ const ProductEdit = (match) => {
             
 }
     
-    console.log("jestem w edit body")
     return ( <>
         <div id="userMsg">{message}</div>
         <div id="body"> 

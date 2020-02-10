@@ -2,16 +2,18 @@ import React, {useState} from 'react';
 import {withRouter} from "react-router"
 import {Link} from "react-router-dom"
 import Add from "./HeaderComponents/Add"
+import axios from "axios"
 
 var promotions=[]
+
+
 
 const Header = (match) => {
     const {logged, shoppingList, userName}=match.userState
     const [searchingFor, setSearchingFor]=useState("")
     const [searchingCategories, setSearchingCategories]=useState("All categories")
-    
-    if (match.passedObject && match.passedObject.promotions) promotions=match.passedObject.promotions
-
+    const [message, setMessage]=useState("")
+    const promotions=match.promotions
     const handleSearch=(e)=>{
         setSearchingFor(e.target.value)
     }
@@ -22,17 +24,29 @@ const Header = (match) => {
     
     const sendSearch=()=>{
         let category
-        if (searchingCategories!=="All categories") category=""
+        if (searchingCategories==="All categories") category=""
         else category=searchingCategories
-        match.passData({search: searchingFor, kind: category})
-        match.history.push({pathname:"/"})
-        setSearchingFor("")
-        setSearchingCategories("")
-    }
-
-
+        let query= `${category}:${searchingFor}`
+        axios
+        .get(`http://localhost:5000/product/search/${query}`)
+        .then((res)=>{
+            if (res.data.length===0) {
+                setMessage("No results")
+                match.setProducts([])
+                match.history.push({pathname: "/"})
+                setSearchingCategories("")
+                setSearchingFor("")}
+            else {
+                match.setProducts(res.data)
+                match.history.push({pathname: "/"})
+                setSearchingCategories("")
+                setSearchingFor("")}})
+        .catch(()=>{
+            setMessage("Cant load products")
+            setSearchingCategories("")
+            setSearchingFor("")})}
+        
     
-    console.log("w header")
     return ( 
         <div className="header">
             <div id="search">

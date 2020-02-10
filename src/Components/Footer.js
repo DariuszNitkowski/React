@@ -4,7 +4,6 @@ import {Link} from "react-router-dom"
 
 const Footer = React.memo(() => {
     
-    console.log("w footer")
     return ( 
         <div id="footer">
             Site made by dn

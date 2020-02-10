@@ -5,15 +5,16 @@ const Sell = (props) => {
     
     const{logged, email}=props.userState
     const[myProducts, setMyProducts]=useState([])
+    const [message, setMessage]=useState("")
     
     useEffect(()=>{
         axios
         .get(`http://localhost:5000/product/list/${email}`)
         .then(res=>setMyProducts(res.data))
-        .catch(err=>console.log("jakis błąd"))},[])
+        .catch(err=>setMessage("Cant load items from your basket"))},[])
     
     const showSingleProduct=(product)=>{
-        props.passData(product, "sell")
+        props.passData({from: "sell", data: product, to: "singleproduct"})
         props.history.push({pathname:"/singleproduct"})}
         
     
@@ -25,17 +26,16 @@ const Sell = (props) => {
             let newList=myProducts.filter(product=>product._id!==id)
             setMyProducts(newList)
         })
-        .catch(err=>console.log("jakis błąd"))
+        .catch(err=>setMessage("Couldnt remove your sell offer"))
     }
     const handleEdit=(product)=>{
-        // let editedProduct=myProducts.find(ele=>ele._id===id)
-        props.passData(product)
+        props.passData({from: "sell", data: product, to: "edit"})
         props.history.push({pathname:"/editproduct"})
     }
 
-    console.log("jestem w sell")
 
-    return ( 
+    return ( <>
+        <div id="userMsg">{message}</div>
         <div id="body">
             {logged?<>
             <div>{myProducts.length>0?<><div id="sellTitle">Products you are currently selling</div><ul>{myProducts.map(item=><li key={item._id}>
@@ -47,7 +47,7 @@ const Sell = (props) => {
             <div id="addProductBtn"><button onClick={()=>props.history.push({pathname:"/addproduct"})}>
             Add new product to sell</button></div> </>:
             <div id="pageMsg">You need to log in</div>}
-        </div>
+        </div></>
 
      );
 }

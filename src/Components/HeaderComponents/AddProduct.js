@@ -36,42 +36,6 @@ const AddProduct = (match) => {
         }
     }
 
-    // const uploadData=(name, vol, productDescr, category, price)=>{
-        // if (message===""){
-        //     let keywords=[]
-        //     console.log("linki w data",links)
-        //     keywords.push(name, productDescr, category)
-        //     let newProduct={
-        //         name: name, vol: vol, description: productDescr, category: category, 
-        //         keywords: keywords, price: price, owner: email, links: links}
-        //     axios
-        //     .post("http://localhost:5000/product/add", newProduct)
-        //     .then((res)=>{
-        //         setMessage("Product added")
-        //         setTimeout(()=>match.history.push({pathname:"/sell"}),10000)})
-        //     .catch(()=>setMessage("Cant add product, try again"))}
-        //     console.log("zakonczony upload data")}
-   
-
-
-    // const xxxs=()=>{
-    //     console.log("rozpoczety upload images")
-    //     let links=[]
-    //     let singleFileImg=new FormData()
-    //     let fotos=[file1, file2, file3].filter(item=>item!="")
-    //     for (let foto of fotos){
-    //         singleFileImg.append("upload_preset", "cloudinary_place")
-    //         singleFileImg.append("file", foto)
-    //         axios.post(`https://api.cloudinary.com/v1_1/dm2jhvidl/image/upload/`, singleFileImg)
-    //         .then((res)=>{
-    //             console.log("odpowiedz z axiosa", res.data.url)
-    //             links.append(res.data.url)
-    //             console.log("linki", links)})
-    //         .catch(()=>setMessage("Couldnt add image"))}
-    //     console.log("zakonczony upload images")
-    //     return links
-    // }
-
     const uploadImages = (name, vol, productDescr, category, price) => {
         setMessage("Uploding product")
         let fotos=[file1, file2, file3].filter(item=>item!=="")
@@ -91,7 +55,6 @@ const AddProduct = (match) => {
             let newProduct={
                 name: name, vol: vol, description: productDescr, category: category, 
                 keywords: keywords, price: price, owner: email, links: adresses}
-            console.log(newProduct)
             axios
             .post("http://localhost:5000/product/add", newProduct)
             .then((res)=>{

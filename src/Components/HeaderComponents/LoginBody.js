@@ -51,7 +51,6 @@ const LoginBody = (match) => {
 
     
     
-    console.log("w login body")
     return ( <>
         <div id="body">
         <div id="userMsg">{logMessage}</div>
