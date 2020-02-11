@@ -3,7 +3,7 @@
     padding:0;
     margin:0;
     box-sizing: border-box;
-    color: white;
+    background-color:#000099;
 }
 
 .root{
@@ -15,7 +15,7 @@
     background-color:#000099;
     display: flex;
     margin-top: -45px;
-    height: 45px;
+    height: 8vh;
     width: 100%;
     position: fixed;
     align-items: center;
@@ -38,7 +38,7 @@ a :visited{
     margin-top: 45px;
     background-color: #e0e0eb;
     /* min-height: 625px; */
-    height: 92vh;
+    height: 88vh;
     text-align: center;
     z-index: -1;
     width: 100%;
@@ -47,7 +47,7 @@ a :visited{
 #footer{
     background-color: #000099;
     text-align: center;
-    height: 3vh;
+    height: 5vh;
       
 
     
@@ -166,7 +166,7 @@ a :visited{
     transform: translateX(30px);
     font-size: 30px;
     width: 450px;
-    height: 30px;
+    height: 35px;
     white-space: nowrap;
 }
 

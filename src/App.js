@@ -56,20 +56,6 @@ function App() {
 
 
   
-  //35 znaków w add max!  
-  //do zbadania:
-  // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja
-  // sprawdzic czy usuwa file1 po przejsciu do innego komponentu czy trzyma w pamieci. jesli trzyma
-  //to jakis reset potrzebny. dodatkowo reset URL ów URL.revokeObjectURL()
-  // czy url na bolb to naprawde tyle kodu? jesli tak to zostaje przy zmiennych dla zdjec
-  
-  // do poprawienia:
-  //moze jakas refaktoryzacja w product edit bo wyglada ciezko
-  // moze dodac jakies ostrzezenie przy usuwaniu produktu. jakis alert!
-
-
-  
-  console.log("w głównym")
   return (
     <>
 
