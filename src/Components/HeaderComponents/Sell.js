@@ -37,15 +37,16 @@ const Sell = (props) => {
     return ( <>
         <div id="userMsg">{message}</div>
         <div id="body">
+        
             {logged?<>
-            <div>{myProducts.length>0?<><div id="sellTitle">Products you are currently selling</div><ul>{myProducts.map(item=><li key={item._id}>
-            <div id="sellName">{item.name}</div><div id="sellPrice">{item.price}</div>
-            <div id="sellEditBtn"><button onClick={()=>handleEdit(item)}>Edit</button></div>
-            <div id="sellDeleteBtn"><button onClick={()=>handleDelete(item._id)}>Delete</button></div>
-            <div id="sellDisplayBtn"><button onClick={()=>showSingleProduct(item)}>Display this offer</button></div>
-            </li>)}</ul></>:null}</div>
             <div id="addProductBtn"><button onClick={()=>props.history.push({pathname:"/addproduct"})}>
-            Add new product to sell</button></div> </>:
+            Add new product to sell</button></div><div id="sellTitle">Products you are currently selling</div>
+            <div id="sellTable">{myProducts.length>0?<><ul>{myProducts.map(item=><li key={item._id}>
+            <div className="sellName">{item.name}</div><div className="sellPrice">{item.price} PLN</div>
+            <div className="sellEditBtn"><button onClick={()=>handleEdit(item)}>Edit</button></div>
+            <div className="sellDeleteBtn"><button onClick={()=>handleDelete(item._id)}>Delete</button></div>
+            <div className="sellDisplayBtn"><button onClick={()=>showSingleProduct(item)}>Display this offer</button></div>
+            </li>)}</ul></>:null}</div></>:
             <div id="pageMsg">You need to log in</div>}
         </div></>
 

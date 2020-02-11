@@ -58,13 +58,16 @@ const ProductEdit = (match) => {
         <div id="userMsg">{message}</div>
         <div id="body"> 
             <div id="body">
-            {logged?
+            {logged?<div id="editProduct">
             <form name="productForm" onSubmit={saveChanges}>
                 <input name="name" type="text" value={name} onChange={handleChanges}/> <input name="vol" type="number" 
-                value={vol} min={1} onChange={handleChanges}/><select name="category" onChange={handleChanges}><option>{category}</option><option>ssanie pałki</option></select>
-                <textarea value={description} onChange={handleChanges} name="description"/><input type="text" 
-                value={price} onChange={handleChanges} name="price"/><button>Save changes</button>
-            </form>
+                value={vol} min={1} onChange={handleChanges}/><select name="category" onChange={handleChanges}><option>{category}</option>
+                <option>Books</option><option>Cars</option><option>Clothing</option><option>Health</option> <option>Home</option> 
+                <option>Sport</option> <option>Travel</option> </select><input type="text" 
+                value={price} onChange={handleChanges} name="price"/>
+                <div id="editDescr"><textarea value={description} onChange={handleChanges} name="description"/></div>
+                <button>Save changes</button>
+            </form></div>
             :
             <div id="pageMsg">You need to log in</div>}
          </div>   

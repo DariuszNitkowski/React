@@ -16,7 +16,7 @@ mongoose.connect(uri, {useCreateIndex: true, useNewUrlParser:true, useUnifiedTop
 const connection=mongoose.connection
 
 connection.once("open",()=>{
-    console.log("zalogowany do bazy")
+    console.log("backend logged")
 })
 
 const userRoute=require("./user.routes")

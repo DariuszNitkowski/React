@@ -55,9 +55,7 @@ function App() {
   }
 
 
-  // do zrobienia: 
   
-  //ostylowanie
   //35 znaków w add max!  
   //do zbadania:
   // w routach w backendzie jakies przesyłanie błedów zeby było lepiej niz console log! musi byc komunikacja

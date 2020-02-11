@@ -81,7 +81,7 @@ const Header = (match) => {
                 
             <div id="basket">
                 <Link to="/basket">
-                    <button>Go to cashier! items: {shoppingList.length}</button>
+                    <button>Items in your basket: {shoppingList.length}</button>
                 </Link>
             </div></>: 
             

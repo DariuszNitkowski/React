@@ -96,23 +96,23 @@ const AddProduct = (match) => {
     return ( <>
             <div id="userMsg">{message}</div>
             <div id="body">
-            {logged?
+            {logged?<div id="addProduct">
             <form name="productForm" onSubmit={addProduct}>
                 <div id="addName"><input name="productName" type="text" placeholder="name of product"/></div> 
                 <div id="addVol"><input name="productVol" type="number" placeholder="items?" min={1}/></div>
                 <div id="addCategory"><select name="category"><option>What category?</option><option>Books</option>
                 <option>Cars</option><option>Clothing</option><option>Health</option><option>Home</option>
                 <option>Sport</option><option>Travel</option></select></div>
+                <div id="addPrice"><input type="text" placeholder="price for signle item" name="productPrice"/></div>
                 <div id="addDesc"><textarea placeholder="please describe your product" name="productDescr"/></div>
-                <div id="addPrice"><input type="text" placeholder="what is a price for signle item" name="productPrice"/></div>
             
             
-            Please upload up to 3 pictures showing the product.
+            <div id="addInfo">Please upload up to 3 pictures showing the product.</div>
             
             <div id="addImage1"><input onChange={(e)=>imageChange(e,"first")} type="file" name="pic1" accept="image/*"/></div>
             <div id="addImage2"><input onChange={(e)=>imageChange(e, "second")} type="file" name="pic2" accept="image/*"/></div>
             <div id="addImage3"><input onChange={(e)=>imageChange(e, "third")} type="file" name="pic3" accept="image/*"/></div>
-            <div id="addBtn"><button>Add product</button></div></form>:
+            <div id="addBtn"><button>Add product</button></div></form></div>:
             <div id="pageMsg">You need to log in</div>}
             {(foto.first+foto.second+foto.third).length>0?<div id="imgAdddedAvatar">This foto will apear as avatar in main list of products<img  alt={""}src={foto.first?foto.first:foto.second?foto.second:foto.third?foto.third:null}/></div>:null}
             {foto.first?<div className="imgAddded">Those will be visible if product will be clicked<img src={foto.first} alt={""}/></div>:null}

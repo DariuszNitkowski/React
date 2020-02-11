@@ -57,14 +57,14 @@ const CreateAccountBody = (match) => {
         <div id="body">
             {match.userState.logged?<div id="pageMsg"> to create account please log out</div> :
             <>
-            <div id="pageMsg">to create account please fill the form:</div>
+            <div id="pageMsg">to create account please fill the form</div>
             <form onSubmit={addUser} id="newUserForm">
-                <input type="text" name="userName" placeholder="nickname max 16 characters" maxLength={16}/>
-                <input type="text" name="email" placeholder="what is your email adress"/>
-                <div>Type in your new password. Must be minimum 6 characters long</div>
-                <div>
+                <input type="text" name="userName" id="newName" placeholder="nickname max 16 characters" maxLength={16}/>
+                <input type="text" name="email" id="newEmail" placeholder="what is your email adress"/>
+                <div id="newInfo">Type in your new password. Must be minimum 6 characters long</div>
+                <div id="newPass">
                     <input type="password" name="password" placeholder="what will be your password"/></div>
-                <div><input type="password" name="passwordConfirmation" placeholder="please confirm password"/></div>
+                <div id="newPassConf"><input type="password" name="passwordConfirmation" placeholder="please confirm password"/></div>
                 <button type="submit">Create new user</button>
                 
 
