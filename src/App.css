@@ -10,13 +10,12 @@
 
 .header{
     
-    background-color: burlywood;
+    background-color: #ad33ff;
     display: flex;
     margin-top: -45px;
     height: 45px;
     width: 1300px;
     position: fixed;
-    /* overflow: hidden; */
     align-items: center;
     z-index: 1;
 }
@@ -35,27 +34,29 @@ a :visited{
 
 #body{
     margin-top: 45px;
-    background-color: crimson;
-    min-height: 638px;
+    background-color: #e0b3ff;
+    min-height: 625px;
     text-align: center;
     z-index: -1;
-    
-}
+    width: 100%;
+    white-space: nowrap;}
 
 #footer{
-    background-color: cyan;
+    background-color: #7a00cc;
     text-align: center;
     min-height: 25px;
     
 }
 #footer button{
     transform: translateX(500px);
+    background-color: #ebccff;
+    border-radius: 10%;
 }
 
 
 /* header */
 #search input{
-    background-color:cornflowerblue;
+    background-color:#ebccff;
     transform: translateX(10px);
     font-size: large;}
 
@@ -68,36 +69,78 @@ a :visited{
 }
 
 #categories select{
-    background-color: darkred;
+    background-color: #ebccff;
     transform: translateX(20px);
     font-size: large;}
 
 
+#basket{
+    transform: translateX(-80px);
+}
 
 #basket button{
-    background-color: yellow;
-    transform: translateX(-80px);
+    background-color: #6b00b3;
+    border-radius: 7%;
     width: 200px;
     font-size: large;
 }
 #dropdown button{
-    background-color: yellow;
+    background-color: #6b00b3;
     width: 120px;
     font-size: large;
+    border-radius: 7%;
 }
 
 
+/* #loginEmail{
+    transform: translateY(100px) translateX(0px);    
+    
+}
 
+*/
+#loginBtn{
+    transform: translateY(50px) translateX(0px);
+} 
+
+#loginArea{
+    transform: translateY(150px);
+    
+    border-bottom: solid black;
+}
+
+#loginPass{
+    transform: translateY(15px) translateX(-10px);    
+}
+#loginEmail input{
+    font-size: large;
+}
+
+#loginPass input{
+    font-size: large;
+}
+#loginBtn button{
+    font-size: large;
+    padding: 10px;
+    border-radius: 7%;
+}
+
+#newAccount{
+    transform: translateY(250px) translateX(-10px);
+    font-size: large;
+}
+#login{
+    transform: translateX(250px);
+}
 
 #login button{
     font-size: large;
-    background-color: yellow;
+    background-color: #6b00b3;
     width: 120px;
-    transform: translateX(250px);}
+    border-radius: 7%;}
 
 
 #add{
-    background-color: violet;
+    background-color: #ad33ff;
     transform: translateX(30px);
     font-size: 30px;
     width: 450px;
@@ -114,7 +157,7 @@ a :visited{
 
 
 #products {
-    white-space: nowrap;
+    
     transform: translateY(50px) translateX(-100px);
 }
 
@@ -284,7 +327,8 @@ Link{
 
     
 #pageMsg{
-    transform: translateY(40px);
+    transform: translateY(100px);
+    font-size: large;
 }
 
 #addProductBtn{

@@ -55,16 +55,16 @@ const LoginBody = (match) => {
         <div id="body">
         <div id="userMsg">{logMessage}</div>
             {logged?<div id="pageMsg">You are logged already</div>:
-            <>
+            <div id="loginArea">
             <form name="logForm" onSubmit={handleLogin}>
-                <div>email<input type="text" name="email"/></div>
-            <div>password<input type="text" name="pass"/></div>
-            <div><button type="submit">Login</button></div>
+                <div id="loginEmail">email<input type="text" name="email"/></div>
+            <div id="loginPass">password<input type="text" name="pass"/></div>
+            <div id="loginBtn"><button type="submit">Login</button></div>
             </form>
             
         
-            <div><Link to="/create">Utwórz konto</Link></div>
-            </>}
+            <div id="newAccount"><Link to="/create">Press here to create new account</Link></div>
+            </div>}
         </div></>
      );
 }

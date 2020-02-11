@@ -15,8 +15,7 @@ const Header = (match) => {
     const [message, setMessage]=useState("")
     const promotions=match.promotions
     const handleSearch=(e)=>{
-        setSearchingFor(e.target.value)
-    }
+        setSearchingFor(e.target.value)}
 
     const handleCategories=(e)=>{
         setSearchingCategories(e.target.value)
